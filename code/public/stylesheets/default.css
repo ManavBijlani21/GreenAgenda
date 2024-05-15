@@ -241,6 +241,10 @@ header nav ul li:hover .dropdown-content {
     display: block;
 }
 
+section.behindHeaderPadding {
+    padding-top: 6.25vh;
+}
+
 .actions {
     display: flex;
     justify-content: space-around;

@@ -1,10 +1,11 @@
 const vueApp = new Vue({
     el: "#app",
     data: {
-        hello: "Hello World!"
     },
     computed: {
-
+        hello: function(){
+            return "Hello World!";
+        }
     },
     methods: {
 
