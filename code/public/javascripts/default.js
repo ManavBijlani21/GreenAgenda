@@ -1,12 +1,12 @@
-const app = new Vue({
+const vueApp = new Vue({
     el: "#app",
     data: {
-
+        hello: "Hello World!"
     },
     computed: {
 
     },
     methods: {
-        
+
     }
 });
