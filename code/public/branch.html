@@ -41,7 +41,7 @@
                 </nav>
                 <div class="auth-buttons">
                     <a href="#" class="login">Log In</a>
-                    <a href="#" class="donate">Donate</a>
+                    <a href="#" class="donate">Sign Up</a>
                 </div>
             </header>
 
@@ -54,18 +54,20 @@
             </section>
 
             <section class="content">
-                <p>
-                    It worked!
-                </p>
-                <p>
-                    It worked!
-                </p>
-                <p>
-                    It worked!
-                </p>
-                <p>
-                    It worked!
-                </p>
+                <p>All posts</p>
+
+                <div v-for="(post, index) in posts">
+                    <div class="postWrapper">
+                        <div class="post">
+                            <h2>{{ post.title }}</h2>
+                            <sub> {{ post.timestamp }} </sub>
+                            <sub> {{ post.date }} </sub>
+                            <p> {{ post.description }}</p>
+                            <p> {{ post.location }} </p>
+                            <sub> {{ post.email_id }} </sub>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <footer>
