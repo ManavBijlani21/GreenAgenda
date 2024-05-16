@@ -22,8 +22,29 @@ h1.pageTitle{
 section.content {
     display: flex;
     flex-direction: column;
-    flex: 1;
     padding-top: 5vh;
-    padding-left: 15vw;
-    padding-right: 15vw;
+    padding-left: 20vw;
+    padding-right: 20vw;
+}
+
+.content> *{
+    padding-top: 5vh;
+}
+
+.content .postWrapper{
+    border: solid red;
+    border-radius: 5vh;
+    padding: 5vh;
+}
+
+.content .postWrapper .post h2{
+
+}
+
+.content .postWrapper .post sub{
+
+}
+
+.content .postWrapper .post p{
+
 }
