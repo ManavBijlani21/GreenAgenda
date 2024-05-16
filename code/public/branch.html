@@ -20,20 +20,22 @@
     <body>
         <div id="app">
             <header>
-                <div class="logo">
-                    <img src="link-to-image" alt="Serenity Sanctuary Logo">
-                </div>
+                <a href="/">
+                    <div class="logo">
+                        <img src="/images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    </div>
+                </a>
                 <nav>
                     <ul>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Support Us</a></li>
                         <li class="dropdown">
-                            <a href="#">Branches</a>
+                            <a href="/branch">Branches</a>
                             <ul class="dropdown-content">
-                                <li><a href="#">Branch 1</a></li>
-                                <li><a href="#">Branch 2</a></li>
-                                <li><a href="#">Branch 3</a></li>
-                                <li><a href="#">Branch 4</a></li>
+                                <li><a href="/branch">Branch 1</a></li>
+                                <li><a href="/branch">Branch 2</a></li>
+                                <li><a href="/branch">Branch 3</a></li>
+                                <li><a href="/branch">Branch 4</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Join a Branch</a></li>
@@ -55,16 +57,19 @@
 
             <section class="content">
                 <p>All posts</p>
-
                 <div v-for="(post, index) in posts">
                     <div class="postWrapper">
                         <div class="post">
+                            <button type="button" v-if="post.RSVP" v-on:click="RSVP">
+                                RSVP
+                            </button>
                             <h2>{{ post.title }}</h2>
-                            <sub> {{ post.timestamp }} </sub>
-                            <sub> {{ post.date }} </sub>
+                            <sub> Event Time: {{ post.timestamp }} {{ post.date }} </sub>
+                            <div class="hrWrapper"><hr></div>
                             <p> {{ post.description }}</p>
-                            <p> {{ post.location }} </p>
-                            <sub> {{ post.email_id }} </sub>
+                            <div class="hrWrapper"><hr></div>
+                            <p> Location: {{ post.location }} </p>
+                            <sub> Contact: {{ post.email_id }} </sub>
                         </div>
                     </div>
                 </div>

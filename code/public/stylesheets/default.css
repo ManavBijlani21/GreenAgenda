@@ -34,7 +34,7 @@ header {
     z-index: 1000;
 }
 
-header .logo img {
+header a .logo img {
     height: 5vh;
 }
 
@@ -46,6 +46,11 @@ header nav ul {
 
 header nav ul li a {
     color: white;
+    text-decoration: none;
+}
+
+header nav ul li a:hover {
+    color: darkgrey;
     text-decoration: none;
 }
 
@@ -62,8 +67,19 @@ header .auth-buttons a {
     border-radius: 0.5vw;
 }
 
+header .auth-buttons .login:hover {
+    background-color: white;
+    color: black;
+}
+
 header .auth-buttons .donate {
     background-color: #e91e63;
+    border: none;
+}
+
+header .auth-buttons .donate:hover {
+    color: #e91e63;
+    background-color: white;
     border: none;
 }
 
