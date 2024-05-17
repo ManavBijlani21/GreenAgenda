@@ -1,5 +1,5 @@
 section.pageTop{
-    background-color: rgb(63, 120, 227);
+    background-color: #4fd611;
     padding-top: 6.5vh;
     min-height: 36vh;
 }
@@ -46,8 +46,8 @@ div.hrWrapper{
 
 hr {
     width: auto;
-    color: greenyellow;
-    background-color: greenyellow;
+    color: #4fd611;
+    background-color: #4fd611;
     height: 0.35vh;
     border: none;
 }

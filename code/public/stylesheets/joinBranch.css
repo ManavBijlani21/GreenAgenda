@@ -2,7 +2,70 @@
     background-image: url('../images/homepage-1.png');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 125vh;
+    padding: 11.5vh 25vw 5vh 25vw;
 }
 
+.formWrapper{
+    width: 50vw;
+    height: 105vh;
+    padding: 5vh 5vw 5vh 5vw;
+    background-color: white;
+}
 
+.formWrapper form {
+    width: 40vw;
+    height: 95vh;
+    justify-content: center;
+    text-align: center;
+}
+
+.formWrapper form h1 {
+    width: 40vw;
+    text-align: center;
+    font-size: 2.5vw;
+    text-wrap: wrap;
+    padding-top: 10vh;
+}
+
+.formWrapper form p {
+    width: 40vw;
+    padding-top: 5vh;
+    font-size: 1.75vw;
+    text-wrap: wrap;
+    text-align: center;
+}
+
+.formWrapper form sub {
+    display: block;
+    width: 40vw;
+    padding-top: 7.5vh;
+    padding-bottom: 2.5vh;
+    font-size: 1.25vw;
+    text-wrap: wrap;
+    text-align: center;
+}
+
+.formWrapper form div {
+    width: 40vw;
+    font-size: 2vw;
+    text-wrap: wrap;
+    padding-top: 2.5vh;
+    text-align: center;
+}
+
+.formWrapper form div input {
+    width: 20vw;
+    font-size: 2vw;
+    text-wrap: wrap;
+    border: none;
+    border-bottom: solid black;
+    text-align: center;
+}
+
+.formWrapper form div button {
+    width: 20vw;
+    font-size: 2vw;
+    text-wrap: wrap;
+    text-align: center;
+}
