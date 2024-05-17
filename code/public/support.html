@@ -4,19 +4,14 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Branch Info
+            Default HTML template page for WDC Group Project
         </title>
-        <link rel="stylesheet" href="stylesheets/default.css">
-        <link rel="stylesheet" href="stylesheets/branch.css">
-        <!-- Put the specific stylesheet for your page here
-        <link rel="stylesheet" href="stylesheets/style.css">
-        -->
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        <script src="javascripts/branch.js" defer></script>
-        <!--put the specific script for your page above by renaming the path away from default.js
+        <link rel="stylesheet" href="stylesheets/support.css">
 
-        -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+        <script src="javascripts/support.js" defer></script>
     </head>
+
     <body>
         <div id="app">
             <header>
@@ -47,36 +42,76 @@
                 </div>
             </header>
 
-            <section class="pageTop">
-                <div class="titleWrap">
-                    <h1 class="pageTitle">
-                        Latest News
-                    </h1>
-                </div>
-            </section>
+            <div id = "get_involved" style = "font-family:Arial, Helvetica, sans-serif">
+                <h1>Get Involved with</h1>
+                <h1>Serenity Sanctuary</h1>
+            </div>
 
-            <section class="content">
-                <div>
-                    <p class="allPosts">All posts</p>
-                    <input class="searchBar" type="text" v-model="search" placeholder="Search">
-                </div>
-                <div v-for="(post, index) in posts">
-                    <div class="postWrapper">
-                        <div class="post">
-                            <button type="button" v-if="post.RSVP" v-on:click="RSVP">
-                                RSVP
-                            </button>
-                            <h2>{{ post.title }}</h2>
-                            <sub> Event Time: {{ post.timestamp }} {{ post.date }} </sub>
-                            <div class="hrWrapper"><hr></div>
-                            <p> {{ post.description }}</p>
-                            <div class="hrWrapper"><hr></div>
-                            <p> Location: {{ post.location }} </p>
-                            <sub> Contact: {{ post.email_id }} </sub>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class = "membership">
+                <h2>Membership</h2>
+                <h2>Opportunities</h2>
+                <br>
+                <p>Welcome to Serenity Sanctuary, where you can make a real difference. Join us to </p>
+                <p>support our various branches and their events. Be a part of positive change and </p>
+                <p>help us make a meaningful impact in the community.</p>
+                <br>
+                <div id = "join_now"><button type="button">Join Now</button></div>
+
+            </div>
+
+            <img src = "images/support_page_1.jpg" alt = "Team Image" class = "image_class">
+
+            <div class = "ways_of_support">
+                <h2>Ways to Support</h2>
+                <br>
+                <p>Become a member </p>
+                <br>
+
+            </div>
+
+            <table>
+
+                <tr>
+
+                <td class = "local">
+                    <h2>Attend Local Events</h2>
+
+                    <p>Visit our branches across different </p>
+                    <p>locations and take part in our impactful </p>
+                    <p>events and community initiatives.</p>
+                </td>
+
+                <td class = "online">
+                    <h2>Online Donations</h2>
+
+                    <p>Make a tax-deductible contribution towards our </p>
+                    <p>causes and support our ongoing projects.</p>
+                    <br>
+                    <div id = "donation_done"><button type="button">Donate Now</button></div>
+                </td>
+
+                <td class = "connect">
+                    <h2>Connect with Us</h2>
+
+                    <p>You can also connect with us to learn more </p>
+                    <p>about our work and find out how you can </p>
+                    <p>contribute offline. Call us at 123-456-7890.</p>
+                </td>
+
+
+
+
+
+                </tr>
+
+
+            </table>
+
+
+
+
+
+
 
             <footer>
                 <div class="join">
