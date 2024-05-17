@@ -15,6 +15,11 @@ router.get('/landingpage', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/homepage.html'));
 });
 
+
+router.get('/about', function(req, res, next){
+  res.sendFile(path.join(__dirname, '../public/about.html'));
+});
+
 router.get('/branch', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/branch.html'));
 });
