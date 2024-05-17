@@ -141,6 +141,7 @@ header nav ul li .dropdown:hover .dropdown-content {
 
 .settings-section input,
 .settings-section textarea,
+.settings-section select,
 .settings-section button {
     padding: 10px;
     margin-bottom: 10px;
@@ -157,4 +158,30 @@ header nav ul li .dropdown:hover .dropdown-content {
 
 .settings-section button[type="submit"]:hover {
     background-color: #c2185b;
+}
+
+.settings-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.settings-section table th,
+.settings-section table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.settings-section table th {
+    background-color: #f4f4f4;
+    cursor: pointer;
+}
+
+.settings-section table th:hover {
+    background-color: #ddd;
+}
+
+.settings-section table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
 }
