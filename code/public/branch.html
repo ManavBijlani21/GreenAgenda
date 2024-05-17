@@ -56,7 +56,10 @@
             </section>
 
             <section class="content">
-                <p>All posts</p>
+                <div>
+                    <p class="allPosts">All posts</p>
+                    <input class="searchBar" type="text" v-model="search" placeholder="Search">
+                </div>
                 <div v-for="(post, index) in posts">
                     <div class="postWrapper">
                         <div class="post">

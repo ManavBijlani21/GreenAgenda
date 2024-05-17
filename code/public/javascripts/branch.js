@@ -2,7 +2,7 @@ const vueApp = new Vue({
     el: "#app",
     data: {
         baseURL: "http://localhost:8080",
-        posts: [
+        posts1: [
             {
                 title: "Title 1, most recent post",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque velit ut lacinia efficitur. Nam vitae aliquet massa. Proin mollis ante sem, nec posuere velit pellentesque vehicula. Proin rutrum, tellus a vulputate tincidunt, mauris turpis porttitor ante, non mattis elit est id augue. Vestibulum venenatis facilisis nibh, eget pharetra leo elementum non. Suspendisse eros est, tempus sit amet lobortis in, tempus nec sem.",
@@ -34,9 +34,20 @@ const vueApp = new Vue({
                 RSVP: false
             }
         ],
-        test: ""
+        test: "",
+        loadPosts: true,
+        search: ""
     },
     computed: {
+        posts: function(){
+            if(this.loadPosts !== true) return [];
+            var ans = [];
+
+            for (let post of this.posts1){
+                if(JSON.stringify(post).includes(this.search)) ans.push(post);
+            }
+            return ans;
+        }
     },
     methods: {
         //this method just extists for testing purposes not related to first milestone submission
