@@ -20,7 +20,7 @@ router.get('/about', function(req, res, next){
 });
 
 router.get('/support', function(req, res, next){
-  res.send(404);
+  res.sendFile(path.join(__dirname, '../public/support.html'));
 });
 
 router.get('/branch', function(req, res, next){
