@@ -26,8 +26,11 @@
 }
 
 div.center div {
-    padding-left: 10vw;
-    padding-right: 10vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 40vw;
+    justify-content: space-around;
 }
 
 div.center div p {
@@ -36,9 +39,15 @@ div.center div p {
 }
 
 div.center div input {
-    width: 20vw;
+    padding: 3vh 0 0.5vh 0;
+    width: 17.5vw;
     border: none;
-    border-bottom: solid black;
+    border-bottom: solid lightgray;
+}
+
+div.center div input.phone {
+    width: 37.5vw;
+    text-align: left;
 }
 
 .specialWrapper {
