@@ -1,0 +1,78 @@
+.signup {
+    padding: 15vh 30vw 0vh 30vw;
+    justify-content: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.signup *{
+    text-align: center;
+}
+
+.title {
+    font-size: 3vw;
+}
+
+.redirect {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.redirlink {
+    color: #e91e63;
+    text-decoration: none;
+}
+
+div.center div {
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
+
+div.center div p {
+    text-align: left;
+    padding-top: 5vh;
+}
+
+div.center div input {
+    width: 20vw;
+    border: none;
+    border-bottom: solid black;
+}
+
+.password{
+    color: #e91e63;
+    float: left;
+    padding-top: 5vh;
+    padding-bottom: 2.5vh;
+}
+
+.specialWrapper {
+    padding-bottom: 5vh;
+}
+
+.special{
+    min-height: 3vh;
+    font-size: 1.5vw;
+    width: 20vw;
+}
+
+.orSign{
+    display: flex;
+    flex-direction: row;
+    width: 40vw;
+}
+
+.orSign hr{
+    width: 6vw;
+    height: 0.1vh;
+    border: none;
+    background-color: black;
+    transform: translate(0, 1.5vh);
+}
+
+.logo2 {
+    width: 4vw;
+    padding-top: 5vh;
+}

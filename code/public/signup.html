@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Sign Up
+        </title>
+        <link rel="stylesheet" href="stylesheets/default.css">
+        <link rel="stylesheet" href="stylesheets/signup.css">
+        <!-- Put the specific stylesheet for your page here
+        <link rel="stylesheet" href="stylesheets/style.css">
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+        <script src="javascripts/signup.js" defer></script>
+        <!--put the specific script for your page above by renaming the path away from default.js
+
+        -->
+    </head>
+    <body>
+        <div id="app">
+            <header>
+                <a href="/">
+                    <div class="logo">
+                        <img src="/images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    </div>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/support">Support Us</a></li>
+                        <li class="dropdown">
+                            <a href="/branch">Branches</a>
+                            <ul class="dropdown-content">
+                                <li><a href="/branch">Branch 1</a></li>
+                                <li><a href="/branch">Branch 2</a></li>
+                                <li><a href="/branch">Branch 3</a></li>
+                                <li><a href="/branch">Branch 4</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/joinBranch">Join a Branch</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="/login" class="login">Log In</a>
+                    <a href="/signup" class="donate">Sign Up</a>
+                </div>
+            </header>
+
+            <section style="padding-top: 6.5vh;">
+
+            </section>
+
+            <section class="signup">
+                <div class="center">
+                    <h1 class="title">Sign Up</h1>
+                    <sub class="redirect">Already a member? <a class="redirlink" href="/login">Log In</a></sub>
+                    <div>
+                        <input type="text" placeholder="First Name">
+                        <input type="text" placeholder="Last Name">
+                        <input type="text" placeholder="Email">
+                        <input type="text" placeholder="Password">
+                        <input class="phone" type="text" placeholder="Phone">
+                        <input type="text" placeholder="Street Address">
+                        <input type="text" placeholder="City">
+                        <input type="text" placeholder="Region/State/Province">
+                        <input type="text" placeholder="Postal/Zip Code">
+                    </div>
+                    <br>
+                    <div class="specialWrapper">
+                        <button class="special" type="button">Sign Up</button>
+                    </div>
+                    <div class="orSign">
+                        <hr><sub>or sign up with</sub><hr>
+                    </div>
+                    <img class="logo2" src="/images/google.png" alt="Google Logo">
+                </div>
+            </section>
+
+            <footer>
+                <div class="join">
+                    <h2>Join Serenity Sanctuary</h2>
+                    <p>Support Our Cause</p>
+                    <button type="button">Sign Up</button>
+                </div>
+                <div class="footer-content">
+                    <div class="contact-info">
+                        <h3>Serenity Sanctuary</h3>
+                        <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>
+                        <p>Email: info@mysite.com</p>
+                        <p>Phone: 123-456-7890</p>
+                        <p>Registered Charity: 12345-67</p>
+                    </div>
+                    <div class="newsletter">
+                        <h3>Get Monthly Updates</h3>
+                        <input type="email" placeholder="Enter your email here *">
+                        <button type="button">Sign Up!</button>
+                    </div>
+                    <div class="quick-links">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Support Us</a></li>
+                            <li><a href="#">Branches</a></li>
+                            <li><a href="#">Join a Branch</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
