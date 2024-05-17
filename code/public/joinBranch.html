@@ -47,15 +47,18 @@
                 </div>
             </header>
 
-            <section style="padding-top: 6.5vh;">
-
-            </section>
-
             <section class="branchJoin">
-                <div class="">
+                <div class="formWrapper">
                     <form v-if="loggedIn">
-                        <input type="text" placeholder="Email">
-                        <button type="button" v-on:click="getLogIn()"></button>
+                        <h1>Sign up for Email Updates</h1>
+                        <p>Join a branch to get branch specific event information on your homepage.</p>
+                        <sub>Branch Name</sub>
+                        <div>
+                            <input type="text" placeholder="" v-model="branchName">
+                        </div>
+                        <div>
+                            <button type="button" v-on:click="getLogIn()">Join</button>
+                        </div>
                     </form>
                 </div>
             </section>
