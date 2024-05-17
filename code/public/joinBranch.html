@@ -4,14 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Default HTML template page for WDC Group Project
+            Join a Branch
         </title>
         <link rel="stylesheet" href="stylesheets/default.css">
+        <link rel="stylesheet" href="stylesheets/joinBranch.css">
         <!-- Put the specific stylesheet for your page here
         <link rel="stylesheet" href="stylesheets/style.css">
         -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        <script src="javascripts/default.js" defer></script>
+        <script src="javascripts/joinBranch.js" defer></script>
         <!--put the specific script for your page above by renaming the path away from default.js
 
         -->
@@ -37,7 +38,7 @@
                                 <li><a href="/branch">Branch 4</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Join a Branch</a></li>
+                        <li><a href="/joinBranch">Join a Branch</a></li>
                     </ul>
                 </nav>
                 <div class="auth-buttons">
@@ -50,11 +51,13 @@
 
             </section>
 
-            <section>
-                <p>
-                    It worked!
-                    {{ hello }}
-                </p>
+            <section class="branchJoin">
+                <div class="">
+                    <form v-if="loggedIn">
+                        <input type="text" placeholder="Email">
+                        <button type="button" v-on:click="getLogIn()"></button>
+                    </form>
+                </div>
             </section>
 
             <footer>
