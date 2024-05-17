@@ -19,12 +19,24 @@ router.get('/about', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/about.html'));
 });
 
+router.get('/support', function(req, res, next){
+  res.send(404);
+});
+
 router.get('/branch', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/branch.html'));
 });
 
 router.get('/joinBranch', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/joinBranch.html'));
+});
+
+router.get('/login', function(req, res, next){
+  res.send(404);
+});
+
+router.get('/signup', function(req, res, send){
+  res.send(404);
 });
 
 router.get('/default', function(req, res, next) {
