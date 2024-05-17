@@ -1,0 +1,97 @@
+#get_involved{
+    padding-top:10vh;
+    padding-bottom:8vh;
+    text-align:center;
+    font-size:34px;
+    color:white;
+    line-height:normal;
+    letter-spacing:normal;
+    background-color:rgb(47, 194, 47);
+    font-style: bold;
+}
+
+.membership{
+    padding-left : 10vh;
+    padding-right: 10vh;
+    padding-top: 10vh;
+    padding-bottom:5vh;
+    text-align:center;
+}
+
+.membership h2{
+    font-size:50px;
+    line-height:1.2;
+
+}
+
+#join_now a{
+    background-color:rgb(198, 53, 77);
+    color:white;
+    font-size:20px;
+    padding: 1vh 1vw 1vh 1vw;
+    text-decoration: none;
+
+}
+
+#join_now a:hover{
+    background-color:rgb(148, 45, 62);
+    color : white;
+
+}
+
+.image_class{
+    height:60vh;
+    width:100%;
+}
+
+.ways_of_support{
+    padding-left : 10vh;
+    padding-right: 10vh;
+    padding-top: 10vh;
+    padding-bottom:5vh;
+    text-align:center;
+}
+
+.ways_of_support h2{
+    font-size:50px;
+    line-height:1;
+
+}
+
+.local{
+    padding:10vh;
+    background-color:maroon;
+    color:white;
+}
+
+.online{
+    padding:10vh;
+    background-color:rgb(26, 202, 26);
+    color:white;
+}
+
+.connect{
+    padding:10vh;
+    background-color:black;
+    color:white;
+}
+
+#donation_done button{
+    background-color:white;
+    color:black;
+    font-size:21px;
+    justify-content:center;
+    align-items:center;
+    display:flex;
+
+}
+
+#donation_done button:hover{
+    background-color:darkblue;
+    color : white;
+
+}
+
+td {
+    width: 33vw;
+}

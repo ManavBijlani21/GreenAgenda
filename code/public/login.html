@@ -4,15 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Branch Info
+            Log-In
         </title>
         <link rel="stylesheet" href="stylesheets/default.css">
-        <link rel="stylesheet" href="stylesheets/branch.css">
+        <link rel="stylesheet" href="stylesheets/login.css">
         <!-- Put the specific stylesheet for your page here
         <link rel="stylesheet" href="stylesheets/style.css">
         -->
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        <script src="javascripts/branch.js" defer></script>
+        <script src="javascripts/login.js" defer></script>
         <!--put the specific script for your page above by renaming the path away from default.js
 
         -->
@@ -22,7 +22,7 @@
             <header>
                 <a href="/">
                     <div class="logo">
-                        <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                        <img src="/images/homepage-1.png" alt="Serenity Sanctuary Logo">
                     </div>
                 </a>
                 <nav>
@@ -47,34 +47,28 @@
                 </div>
             </header>
 
-            <section class="pageTop">
-                <div class="titleWrap">
-                    <h1 class="pageTitle">
-                        Latest News
-                    </h1>
-                </div>
+            <section style="padding-top: 6.5vh;">
+
             </section>
 
-            <section class="content">
-                <div>
-                    <p class="allPosts">All posts</p>
-                    <input class="searchBar" type="text" v-model="search" placeholder="Search">
-                </div>
-                <div v-for="(post, index) in posts">
-                    <div class="postWrapper">
-                        <div class="post">
-                            <button type="button" v-if="post.RSVP" v-on:click="RSVP">
-                                RSVP
-                            </button>
-                            <h2>{{ post.title }}</h2>
-                            <sub> Event Time: {{ post.timestamp }} {{ post.date }} </sub>
-                            <div class="hrWrapper"><hr></div>
-                            <p> {{ post.description }}</p>
-                            <div class="hrWrapper"><hr></div>
-                            <p> Location: {{ post.location }} </p>
-                            <sub> Contact: {{ post.email_id }} </sub>
-                        </div>
+            <section class="signup">
+                <div class="center">
+                    <h1 class="title">Log In</h1>
+                    <sub class="redirect">New to this site? <a class="redirlink" href="/signup">Sign Up</a></sub>
+                    <div>
+                        <p>Email</p>
+                        <input type="text">
+                        <p>Password</p>
+                        <input type="text">
+                        <a href="#" class="password">Forgot Password?</a>
                     </div>
+                    <div class="specialWrapper">
+                        <button class="special" type="button">Log In</button>
+                    </div>
+                    <div class="orSign">
+                        <hr><sub>or log in with</sub><hr>
+                    </div>
+                    <img class="logo2" src="/images/google.png" alt="Google Logo">
                 </div>
             </section>
 
