@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="stylesheets/default.css">
+    <link rel="stylesheet" href="stylesheets/settings.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="javascripts/settings.js" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <a href="/">
+                <div class="logo">
+                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                </div>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/support">Support Us</a></li>
+                    <li class="dropdown">
+                        <a href="/branch">Branches</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/branch">Branch 1</a></li>
+                            <li><a href="/branch">Branch 2</a></li>
+                            <li><a href="/branch">Branch 3</a></li>
+                            <li><a href="/branch">Branch 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/joinBranch">Join a Branch</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="/login" class="login">Log In</a>
+                <a href="/signup" class="donate">Sign Up</a>
+            </div>
+        </header>
+
+        <section style="padding-top: 6.5vh;"></section>
+        <div class="nav">
+            <a href="#" @click="toggleSection('user')">My Account</a>
+            <a href="#" @click="toggleSection('manager')">Branch Manager Settings</a>
+            <a href="#" @click="toggleSection('admin')">Admin Settings</a>
+        </div>
+        <section v-if="currentSection === 'user'" class="settings-section">
+            <h2>User Settings</h2>
+            <form @submit.prevent="saveUserChanges">
+                <h3>Account Information</h3>
+                <label for="email">Email:</label>
+                <input type="email" id="email" v-model="user.email" disabled>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" v-model="user.password">
+
+                <h3>Personal Information</h3>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" v-model="user.firstName">
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" v-model="user.lastName">
+
+                <label for="contact-number">Contact Number:</label>
+                <input type="text" id="contact-number" v-model="user.phoneNumber">
+
+                <label for="address">Address:</label>
+                <input type="text" id="street" v-model="user.address.street" placeholder="Street">
+                <input type="text" id="street-number" v-model="user.address.streetNumber" placeholder="Street Number">
+                <input type="text" id="city" v-model="user.address.city" placeholder="City">
+                <input type="text" id="state" v-model="user.address.state" placeholder="State">
+                <input type="text" id="postal-code" v-model="user.address.postalCode" placeholder="Postal Code">
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+        <section v-if="currentSection === 'manager'" class="settings-section">
+            <h2>Branch Manager Settings</h2>
+            <form @submit.prevent="saveManagerChanges">
+                <h3>Branch Events</h3>
+                <label for="new-event-title">Event Title:</label>
+                <input type="text" id="new-event-title" v-model="manager.newEvent.title">
+
+                <label for="new-event-description">Event Description:</label>
+                <textarea id="new-event-description" v-model="manager.newEvent.description"></textarea>
+
+                <label for="new-event-date">Event Date:</label>
+                <input type="date" id="new-event-date" v-model="manager.newEvent.date">
+
+                <label for="new-event-location">Event Location:</label>
+                <input type="text" id="new-event-location" v-model="manager.newEvent.location">
+
+                <label for="new-event-visibility">Event Visibility:</label>
+                <select id="new-event-visibility" v-model="manager.newEvent.visibility">
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+
+                <button type="button" @click="addEvent">Add Event</button>
+
+                <h3>Modify Branch Event</h3>
+                <label for="modify-event-id">Event ID:</label>
+                <input type="text" id="modify-event-id" v-model="manager.modifyEvent.id">
+
+                <label for="modify-event-title">New Event Title:</label>
+                <input type="text" id="modify-event-title" v-model="manager.modifyEvent.title">
+
+                <label for="modify-event-description">New Event Description:</label>
+                <textarea id="modify-event-description" v-model="manager.modifyEvent.description"></textarea>
+
+                <label for="modify-event-date">New Event Date:</label>
+                <input type="date" id="modify-event-date" v-model="manager.modifyEvent.date">
+
+                <label for="modify-event-location">New Event Location:</label>
+                <input type="text" id="modify-event-location" v-model="manager.modifyEvent.location">
+
+                <label for="modify-event-visibility">Event Visibility:</label>
+                <select id="modify-event-visibility" v-model="manager.modifyEvent.visibility">
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+
+                <button type="button" @click="modifyEvent">Modify Event</button>
+
+                <h3>Branch Members</h3>
+                <label for="view-members">View Branch Members:</label>
+                <button type="button" @click="viewMembers">View Members</button>
+
+                <h3>Event RSVPs</h3>
+                <label for="view-rsvp">View Event RSVPs:</label>
+                <button type="button" @click="viewRSVPs">View RSVPs</button>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+        <section v-if="currentSection === 'admin'" class="settings-section">
+            <h2>Admin Settings</h2>
+            <form @submit.prevent="saveAdminChanges">
+                <h3>Branch Management</h3>
+                <label for="add-branch-name">Branch Name:</label>
+                <input type="text" id="add-branch-name" v-model="admin.addBranch.name">
+
+                <label for="add-branch-phone">Branch Phone Number:</label>
+                <input type="text" id="add-branch-phone" v-model="admin.addBranch.phoneNumber">
+
+                <label for="add-branch-email">Branch Email:</label>
+                <input type="email" id="add-branch-email" v-model="admin.addBranch.email">
+
+                <label for="add-branch-address">Branch Address:</label>
+                <input type="text" id="branch-street" v-model="admin.addBranch.address.street" placeholder="Street">
+                <input type="text" id="branch-street-number" v-model="admin.addBranch.address.streetNumber"
+                    placeholder="Street Number">
+                <input type="text" id="branch-city" v-model="admin.addBranch.address.city" placeholder="City">
+                <input type="text" id="branch-state" v-model="admin.addBranch.address.state" placeholder="State">
+                <input type="text" id="branch-postal-code" v-model="admin.addBranch.address.postalCode"
+                    placeholder="Postal Code">
+
+                <button type="button" @click="addBranch">Add Branch</button>
+
+                <h3>Delete Branch</h3>
+                <label for="delete-branch-id">Branch ID:</label>
+                <input type="text" id="delete-branch-id" v-model="admin.deleteBranch.id">
+
+                <button type="button" @click="deleteBranch">Delete Branch</button>
+
+                <h3>Set Manager of Branch</h3>
+                <label for="set-manager-branch-id">Branch ID:</label>
+                <input type="text" id="set-manager-branch-id" v-model="admin.setManager.branchId">
+
+                <label for="set-manager-email">Manager Email:</label>
+                <input type="email" id="set-manager-email" v-model="admin.setManager.email">
+
+                <button type="button" @click="setBranchManager">Set Manager</button>
+
+                <h3>Manage Users</h3>
+                <label for="search-users">Search Users:</label>
+                <input type="text" id="search-users" v-model="admin.searchQuery" @input="searchUsers">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th @click="sortUsers('firstName')">First Name</th>
+                            <th @click="sortUsers('lastName')">Last Name</th>
+                            <th @click="sortUsers('email')">Email</th>
+                            <th @click="sortUsers('phoneNumber')">Phone Number</th>
+                            <th @click="sortUsers('userType')">User Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user in filteredUsers" :key="user.email">
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+                            <td>{{ user.userType }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+        <footer>
+            <div class="join">
+                <h2>Join Serenity Sanctuary</h2>
+                <p>Support Our Cause</p>
+                <button type="button">Sign Up</button>
+            </div>
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Serenity Sanctuary</h3>
+                    <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>
+                    <p>Email: info@mysite.com</p>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Registered Charity: 12345-67</p>
+                </div>
+                <div class="newsletter">
+                    <h3>Get Monthly Updates</h3>
+                    <input type="email" placeholder="Enter your email here *">
+                    <button type="button">Sign Up!</button>
+                </div>
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Support Us</a></li>
+                        <li><a href="#">Branches</a></li>
+                        <li><a href="#">Join a Branch</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
