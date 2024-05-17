@@ -79,18 +79,6 @@ header nav ul li .dropdown:hover .dropdown-content {
     margin-left: 10px;
 }
 
-.auth-buttons .login {
-    background-color: #4CAF50;
-    padding: 10px 20px;
-    border-radius: 4px;
-}
-
-.auth-buttons .donate {
-    background-color: #f44336;
-    padding: 10px 20px;
-    border-radius: 4px;
-}
-
 .nav {
     display: flex;
     justify-content: center;
