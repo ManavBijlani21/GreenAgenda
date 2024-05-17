@@ -1,13 +1,13 @@
 section.pageTop{
     background-color: rgb(63, 120, 227);
     padding-top: 6.5vh;
-    min-height: 40vh;
+    min-height: 36vh;
 }
 section div.titleWrap {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-top: 10vh;
+    padding-top: 6vh;
     min-height: 1vh;
 }
 
@@ -23,18 +23,33 @@ section.content {
     display: flex;
     flex-direction: column;
     padding-top: 5vh;
-    padding-left: 20vw;
-    padding-right: 20vw;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    padding-bottom: 5vh;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-.content> *{
-    padding-top: 5vh;
+.content> :not(.content){
+    padding-top: 2.5vh;
 }
 
 .content .postWrapper{
-    border: solid red;
-    border-radius: 5vh;
-    padding: 5vh;
+    border: solid #e91e63;
+    border-radius: 2.5vh;
+    padding: 2.5vh;
+}
+
+div.hrWrapper{
+    padding-top: 1.25vh;
+    padding-bottom: 1.25vh;
+}
+
+hr {
+    width: auto;
+    color: greenyellow;
+    background-color: greenyellow;
+    height: 0.35vh;
+    border: none;
 }
 
 .content .postWrapper .post h2{
@@ -47,4 +62,32 @@ section.content {
 
 .content .postWrapper .post p{
 
+}
+
+.content .postWrapper .post button{
+    float: right;
+    margin: 0;
+    width: 5vw;
+    height: 5vh;
+    font-size: 1vw;
+}
+
+.content .postWrapper .post button:hover{
+    float: right;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+
+.searchBar {
+    float: right;
+    width: 15vw;
+    font-size: min(2.5vh, 1.5vw);
+    padding: 0.5vh;
+    border: solid #e91e63 0.1vh;
+    border-radius: 1.75vh;
+}
+
+.allPosts{
+    display: inline;
 }
