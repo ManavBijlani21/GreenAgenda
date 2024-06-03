@@ -14,14 +14,14 @@ const vueApp = new Vue({
     computed: {
     },
     methods: {
-        async signUp() {
+        async signUp() {  // Method to handle user signup
             try {
                 const response = await fetch("/account/signup", {
-                    method: "POST",
+                    method: "POST",  // Set the HTTP method to POST
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json"  // Set the request header to indicate JSON payload
                     },
-                    body: JSON.stringify({
+                    body: JSON.stringify({  // Convert the data to JSON string
                         firstName: this.firstName,
                         lastName: this.lastName,
                         email: this.email,
@@ -34,18 +34,18 @@ const vueApp = new Vue({
                     })
                 });
 
-                if (!response.ok) {
-                    throw new Error("Signup failed");
+                if (!response.ok) {  // Check if the response is not OK
+                    throw new Error("Signup failed");  // Throw an error if signup failed
                 }
 
-                alert("Signup success");
+                alert("Signup success");  // Show success alert
 
-                window.location.href = "/login";
+                window.location.href = "/login";  // Redirect to login page after successful signup
             } catch (error) {
-                console.error(error);
-                alert("Signup failed");
+                console.error(error);  // Log error to console
+                alert("Signup failed");  // Show failure alert
             }
         }
-
     }
 });
+
