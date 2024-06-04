@@ -13,7 +13,7 @@ CREATE DATABASE Website_Database;
  );
 
  CREATE TABLE Address(
-    address_id INT NOT NULL,
+    address_id INT NOT NULL AUTO_INCREMENT,
     street VARCHAR(100),
     street_number VARCHAR(10),
     city VARCHAR(20),
@@ -27,16 +27,16 @@ ALTER TABLE User ADD COLUMN address_id INT NOT NULL;
 ALTER TABLE User ADD FOREIGN KEY (address_id) REFERENCES Address(address_id) ON DELETE CASCADE;
 
 CREATE TABLE Branch(
-    branch_id INT NOT NULL,
+    branch_id INT NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY(branch_id),
     branch_phone_number char(10),
     branch_email_id varchar(255),
+    address_id INT,
     FOREIGN KEY (address_id) REFERENCES Address(address_id) ON DELETE CASCADE
 );
 
-ALTER TABLE Branch ADD PRIMARY KEY (branch_id);
-
 CREATE TABLE Job(
-    job_id INT NOT NULL,
+    job_id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY(job_id),
     title VARCHAR(20),
     status VARCHAR(255),
@@ -46,7 +46,7 @@ CREATE TABLE Job(
 );
 
 CREATE TABLE Event(
-    event_id int,
+    event_id INT AUTO_INCREMENT,
     PRIMARY KEY(event_id),
     title VARCHAR(255),
     description TEXT,
@@ -63,7 +63,7 @@ CREATE TABLE Event(
 
 
 CREATE TABLE RSVP(
-    rsvp_id INT,
+    rsvp_id INT AUTO_INCREMENT,
     PRIMARY KEY(rsvp_id),
     date DATE,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -74,7 +74,9 @@ CREATE TABLE RSVP(
     FOREIGN KEY (event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
 
-ALTER TABLE RSVP MODIFY rsvp_id INT AUTO_INCREMENT;
+ALTER TABLE User MODIFY password VARCHAR(255);
+
+
 
 
 
