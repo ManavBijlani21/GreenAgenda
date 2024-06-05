@@ -24,10 +24,7 @@ const vueApp = new Vue({
                     throw new Error("Login failed");  // Throw an error if login failed
                 }
 
-                const data = await response.json();  // Parse the JSON response
                 alert("Login success");  // Show success alert
-
-                localStorage.setItem("authToken", data.token);  // Store the authentication token in local storage
 
                 window.location.href = "/";  // Redirect to the home page after successful login
             } catch (error) {

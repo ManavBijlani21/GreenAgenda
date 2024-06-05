@@ -1,16 +1,15 @@
-var express = require('express');
+const express = require('express');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const saltRounds = 10;
-var router = express.Router();
-const connection = require('../db'); // MAY CHANGE
+const router = express.Router();
+const connection = require('../app'); // May change
 
 // Route for handling user login
 router.post('/login', function (req, res, next) {
     const { email, password } = req.body;  // Extract email and password from request body
 
     const query = 'SELECT * FROM User WHERE email_id = ?';  // SQL query to find user by email
-    connection.query(query, [email], function (error, results, fields) {
+    connection.query(query, [email], function (error, results) {
         if (error) {
             console.error(error);  // Log error to console
             res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
@@ -35,9 +34,10 @@ router.post('/login', function (req, res, next) {
                 return;
             }
 
-            const token = jwt.sign({ email: user.email_id }, process.env.JWT_SECRET, { expiresIn: '1h' });  // Generate JWT token
-            res.json({ token: token });  // Send token in response
+            req.session.userId = user.id; // Store user ID in session
+            req.session.email = user.email_id; // Store user email in session
 
+            res.json({ message: "Login success" });  // Send success message
         });
     });
 });
@@ -45,13 +45,11 @@ router.post('/login', function (req, res, next) {
 // Route for handling user signup
 router.post('/signup', function (req, res, next) {
     const { firstName, lastName, email, password, phone, streetAddress, city, state, postCode } = req.body;  // Extract user details from request body
-
     const hashedPassword = bcrypt.hashSync(password, saltRounds);  // Hash the password with bcrypt
 
     // Check if email already exists
     const query = 'SELECT * FROM User WHERE email_id = ?';
-
-    connection.query(query, [email], function (error, results, fields) {
+    connection.query(query, [email], function (error, results) {
         if (error) {
             console.error(error);  // Log error to console
             res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
@@ -64,9 +62,8 @@ router.post('/signup', function (req, res, next) {
         }
 
         // Insert new user into database
-        const query = 'INSERT INTO User (first_name, last_name, email_id, password, phone, street_address, city, state, post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-
-        connection.query(query, [firstName, lastName, email, hashedPassword, phone, streetAddress, city, state, postCode], function (error, results, fields) {
+        const insertQuery = 'INSERT INTO User (first_name, last_name, email_id, password, phone, street_address, city, state, post_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        connection.query(insertQuery, [firstName, lastName, email, hashedPassword, phone, streetAddress, city, state, postCode], function (error) {
             if (error) {
                 console.error(error);  // Log error to console
                 res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
