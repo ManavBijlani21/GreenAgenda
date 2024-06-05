@@ -2,26 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 router.use(function (req, res, next) {
-  /* Run the check to see if user logged in */
-  // there is a token in the header
-  const token = req.headers['authorization'];
-
-  if (token) {
-    // Verify the token
-    jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
-      if (err) {
-        // If verification fails, send an unauthorized response
-        return res.status(401).json({ message: "Unauthorized" });
-      } else {
-        // If verification succeeds, proceed to the next middleware or route handler
-        req.decoded = decoded;
-        next();
-      }
-    });
-  }
-  else {
-    res.status(401).json({ message: "Unauthorized" });
-  }
+    // Check if user session exists
+    if (req.session && req.session.userId) {
+        next();  // User is logged in, proceed to the next middleware or route handler
+    } else {
+        res.status(401).json({ message: "Unauthorized" });  // User is not logged in, send unauthorized response
+    }
 });
 
 /* GET users listing. */
