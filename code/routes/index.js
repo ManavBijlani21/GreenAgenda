@@ -56,4 +56,28 @@ router.get('/settings', function (req, res, next) {
   res.sendFile(path.join(__dirname, '../public/settings.html'));
 });
 
+//Establishing the connection with the database
+router.get('/result', function(req, res){
+  //Connect to the database
+  req.pool.getConnection(function(err, connection){
+    //General error handling
+    if (err){
+      res.sendStatus(500);
+      return;
+    }
+
+    //If no error in connection, execute the queries given below
+    //Template query
+    var query = "SHOW TABLES";
+    connection.query(query, function(err, rows,fields){
+      connection.release();
+      if (err){
+        res.sendStatus(500);
+        return;
+      }
+      res.json(rows); //Send response
+    })
+  });
+});
+
 module.exports = router;
