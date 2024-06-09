@@ -4,12 +4,29 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 require('dotenv').config();
 const session = require('express-session');
+//Use mysql in this app
+var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var accountRouter = require('./routes/account');
+var managersRouter = require('./routes/managers');
+var adminsRouter = require('./routes/admins');
+
+//Create a pool (group) of connections to be used for connecting with SQL server
+var dbConnectionPool = mysql.createPool({
+    host : 'localhost', //Location of database
+    database : 'Website_Database'
+});
 
 var app = express();
+
+//Express will run this function on every request
+//For all requests that we handle in index.js, we'll be able to access the pool of connections using req.pool
+app.use(function(req,res,next){
+    req.pool = dbConnectionPool; //pool value can be changed if needed.
+    next();
+
+});
 
 // Use session middleware to handle user sessions
 app.use(session({
@@ -27,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/account', accountRouter);
+app.use('/manager', managersRouter);
+app.use('/admin', adminsRouter);
 
 module.exports = app;

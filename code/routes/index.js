@@ -76,7 +76,7 @@ router.get('/result', function(req, res){
         return;
       }
       res.json(rows); //Send response
-    })
+    });
   });
 });
 
