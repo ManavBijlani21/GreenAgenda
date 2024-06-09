@@ -8,6 +8,7 @@ const session = require('express-session');
 var mysql = require('mysql');
 
 var indexRouter = require('./routes/index');
+var accountsRouter = require('./routes/accounts');
 var usersRouter = require('./routes/users');
 var managersRouter = require('./routes/managers');
 var adminsRouter = require('./routes/admins');
@@ -43,8 +44,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/accounts', accountsRouter);
 app.use('/users', usersRouter);
-app.use('/manager', managersRouter);
-app.use('/admin', adminsRouter);
+app.use('/managers', managersRouter);
+app.use('/admins', adminsRouter);
 
 module.exports = app;
