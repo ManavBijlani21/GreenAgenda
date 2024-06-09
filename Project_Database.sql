@@ -76,6 +76,9 @@ CREATE TABLE RSVP(
 
 ALTER TABLE User MODIFY password VARCHAR(255);
 
+ALTER TABLE Branch ADD COLUMN manager_id varchar(255);
+
+ALTER TABLE Branch ADD FOREIGN KEY (manager_id) REFERENCES User(email_id) ON DELETE SET NULL;
 
 
 
