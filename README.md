@@ -2,6 +2,13 @@
 service mysql start
 service mysql start
 
+
+mysql
+CREATE database Website_Database
+mysql < database_backup.sql (Command to import the database dump)
+(After making the changes to the database)
+mysqldump --databases Website_Database > database_backup.sql
+
 npm start
 
 # Template Repository for COMP SCI 2207/7207 Web & Database Computing (2023 Semester 1)
