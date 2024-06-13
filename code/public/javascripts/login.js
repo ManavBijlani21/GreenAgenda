@@ -9,7 +9,7 @@ const vueApp = new Vue({
     methods: {
         async login() {  // Method to handle user login
             try {
-                const response = await fetch("/account/login", {
+                const response = await fetch("/accounts/login", {
                     method: "POST",  // Set the HTTP method to POST
                     headers: {
                         "Content-Type": "application/json"

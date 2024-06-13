@@ -6,6 +6,7 @@ const vueApp = new Vue({
         email: "",
         password: "",
         phone: "",
+        streetNumber: "",
         streetAddress: "",
         city: "",
         state: "",
@@ -16,7 +17,7 @@ const vueApp = new Vue({
     methods: {
         async signUp() {  // Method to handle user signup
             try {
-                const response = await fetch("/account/signup", {
+                const response = await fetch("/accounts/signup", {
                     method: "POST",  // Set the HTTP method to POST
                     headers: {
                         "Content-Type": "application/json"  // Set the request header to indicate JSON payload
@@ -27,6 +28,7 @@ const vueApp = new Vue({
                         email: this.email,
                         password: this.password,
                         phone: this.phone,
+                        streetNumber: this.streetNumber,
                         streetAddress: this.streetAddress,
                         city: this.city,
                         state: this.state,

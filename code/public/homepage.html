@@ -40,9 +40,9 @@
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a href="/settings" class="donate">Settings</a>
-                <a href="/login" class="login">Log In</a>
-                <a href="/signup" class="donate">Sign Up</a>
+                <a v-if="loggedIn" href="/settings" class="donate">Settings</a>
+                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
+                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
             </div>
         </header>
 
