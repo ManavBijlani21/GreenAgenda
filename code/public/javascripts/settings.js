@@ -31,7 +31,8 @@ const vueApp = new Vue({
                 date: '',
                 location: '',
                 visibility: 'public'
-            }
+            },
+            events: []
         },
         admin: {
             addBranch: {
@@ -77,6 +78,9 @@ const vueApp = new Vue({
         toggleSection(section) {
             if (section == 'user' || (section == 'manager' && this.userType == 'manager') || (section == 'admin' && this.userType == 'admin')) {
                 this.currentSection = section;
+                if (section === 'manager') {
+                    this.fetchEvents();
+                }
             }
         },
         saveUserChanges() {
@@ -125,8 +129,66 @@ const vueApp = new Vue({
                     console.error('Error:', error);
                 });
         },
+        fetchEvents() {
+            fetch('/managers/events')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.manager.events = data.events;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        fetchEventDetails() {
+            if (!this.manager.modifyEvent.id) {
+                alert('Event ID is required');
+                return;
+            }
+            fetch(`/managers/get-event/${this.manager.modifyEvent.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.manager.modifyEvent.title = data.title;
+                        this.manager.modifyEvent.description = data.description;
+                        this.manager.modifyEvent.date = this.formatDate(data.date);
+                        this.manager.modifyEvent.location = data.location;
+                        this.manager.modifyEvent.visibility = data.accessibility_status;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        formatDate(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        },
         modifyEvent() {
-            alert(`Modifying event ID: ${this.manager.modifyEvent.id}`);
+            fetch('/managers/modify-event', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.manager.modifyEvent)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         viewMembers() {
             alert("Viewing branch members");

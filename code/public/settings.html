@@ -106,8 +106,10 @@
                 <button type="button" @click="addEvent">Add Event</button>
 
                 <h3>Modify Branch Event</h3>
-                <label for="modify-event-id">Event ID:</label>
-                <input type="text" id="modify-event-id" v-model="manager.modifyEvent.id">
+                <label for="modify-event-id">Select Event:</label>
+                <select id="modify-event-id" v-model="manager.modifyEvent.id" @change="fetchEventDetails">
+                    <option v-for="event in manager.events" :value="event.id">{{ event.title }}</option>
+                </select>
 
                 <label for="modify-event-title">New Event Title:</label>
                 <input type="text" id="modify-event-title" v-model="manager.modifyEvent.title">
