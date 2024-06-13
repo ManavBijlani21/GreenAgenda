@@ -32,7 +32,17 @@ const vueApp = new Vue({
                 location: '',
                 visibility: 'public'
             },
-            events: []
+            events: [],
+            members: [],
+            newMemberEmail: '',
+            searchQuery: '',
+            sortKey: '',
+            sortOrders: {
+                firstName: 1,
+                lastName: 1,
+                email: 1,
+                phoneNumber: 1,
+            },
         },
         admin: {
             addBranch: {
@@ -62,7 +72,6 @@ const vueApp = new Vue({
                 lastName: 1,
                 email: 1,
                 phoneNumber: 1,
-                userType: 1
             },
             branches: []
         },
@@ -98,13 +107,39 @@ const vueApp = new Vue({
             }
 
             return users;
+        },
+        filteredMembers() {
+            let members = this.manager.members;
+
+            if (this.manager.searchQuery) {
+                const query = this.manager.searchQuery.toLowerCase();
+                members = members.filter(member => {
+                    return member.firstName.toLowerCase().includes(query) ||
+                        member.lastName.toLowerCase().includes(query) ||
+                        member.email.toLowerCase().includes(query) ||
+                        member.phoneNumber.toLowerCase().includes(query);
+                });
+            }
+
+            if (this.manager.sortKey) {
+                members = members.slice().sort((a, b) => {
+                    let result = 0;
+                    if (typeof a[this.manager.sortKey] === 'string') {
+                        result = a[this.manager.sortKey].localeCompare(b[this.manager.sortKey]);
+                    } else if (typeof a[this.manager.sortKey] === 'number') {
+                        result = a[this.manager.sortKey] - b[this.manager.sortKey];
+                    }
+                    return result * this.manager.sortOrders[this.manager.sortKey];
+                });
+            }
+
+            return members;
         }
     },
     mounted() {
         this.checkLoginStatus();
         this.getUserType();
         this.fetchUserInfo();
-        this.fetchBranches();
     },
     methods: {
         toggleSection(section) {
@@ -115,9 +150,11 @@ const vueApp = new Vue({
                 }
                 if (section === 'manager') {
                     this.fetchEvents();
+                    this.fetchBranchMembers();
                 }
                 if (section === 'admin') {
                     this.fetchUsers();
+                    this.fetchBranches();
                 }
             }
         },
@@ -235,8 +272,70 @@ const vueApp = new Vue({
                     console.error('Error:', error);
                 });
         },
-        viewMembers() {
-            alert("Viewing branch members");
+        fetchBranchMembers() {
+            fetch('/managers/members')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.manager.members = data.members;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        addMember() {
+            if (!this.manager.newMemberEmail) {
+                alert('Email is required');
+                return;
+            }
+            fetch('/managers/add-member', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: this.manager.newMemberEmail })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.fetchBranchMembers();
+                        this.manager.newMemberEmail = '';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        removeMember(email) {
+            fetch('/managers/remove-member', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.fetchBranchMembers();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        sortMembers(key) {
+            this.manager.sortKey = key;
+            this.manager.sortOrders[key] = this.manager.sortOrders[key] * -1;
+        },
+        searchMembers() {
         },
         viewRSVPs() {
             alert("Viewing event RSVPs");
@@ -376,9 +475,7 @@ const vueApp = new Vue({
         }
     },
     watch: {
-        'admin.searchQuery': 'searchUsers'
-    },
-    created() {
-        this.fetchUsers();
+        'admin.searchQuery': 'searchUsers',
+        'manager.searchQuery': 'searchMembers'
     }
 });

@@ -132,8 +132,36 @@
                 <button type="button" @click="modifyEvent">Modify Event</button>
 
                 <h3>Branch Members</h3>
-                <label for="view-members">View Branch Members:</label>
-                <button type="button" @click="viewMembers">View Members</button>
+                <label for="new-member-email">Add Member by Email:</label>
+                <input type="email" id="new-member-email" v-model="manager.newMemberEmail">
+                <button type="button" @click="addMember">Add Member</button>
+
+                <h4>Members List</h4>
+                <label for="search-members">Search Members:</label>
+                <input type="text" id="search-members" v-model="manager.searchQuery" @input="searchMembers">
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortMembers('firstName')">First Name</th>
+                                <th @click="sortMembers('lastName')">Last Name</th>
+                                <th @click="sortMembers('email')">Email</th>
+                                <th @click="sortMembers('phoneNumber')">Phone Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="member in filteredMembers" :key="member.email">
+                                <td>{{ member.firstName }}</td>
+                                <td>{{ member.lastName }}</td>
+                                <td>{{ member.email }}</td>
+                                <td>{{ member.phoneNumber }}</td>
+                                <td><button type="button" @click="removeMember(member.email)">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3>Event RSVPs</h3>
                 <label for="view-rsvp">View Event RSVPs:</label>
@@ -204,7 +232,6 @@
                                 <th @click="sortUsers('lastName')">Last Name</th>
                                 <th @click="sortUsers('email')">Email</th>
                                 <th @click="sortUsers('phoneNumber')">Phone Number</th>
-                                <th @click="sortUsers('userType')">User Type</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -214,7 +241,6 @@
                                 <td><input type="text" v-model="user.lastName" @change="markUserAsEdited(user)"></td>
                                 <td><input type="text" v-model="user.email" @change="markUserAsEdited(user)"></td>
                                 <td><input type="text" v-model="user.phoneNumber" @change="markUserAsEdited(user)"></td>
-                                <td><input type="text" v-model="user.userType" @change="markUserAsEdited(user)"></td>
                                 <td><button type="button" @click="saveUserChanges(user)">Save</button></td>
                             </tr>
                         </tbody>

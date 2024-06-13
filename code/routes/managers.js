@@ -127,4 +127,85 @@ router.post('/modify-event', (req, res) => {
     });
 });
 
+// Route to fetch branch members
+router.get('/members', (req, res) => {
+    const query = `
+        SELECT u.first_name AS firstName, u.last_name AS lastName, u.email_id AS email, u.phone_number AS phoneNumber
+        FROM User u
+        JOIN UserBranch ub ON u.email_id = ub.user_id
+        WHERE ub.branch_id = ?
+    `;
+    req.pool.query(query, [req.branchId], (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+            return;
+        }
+        res.status(200).json({ members: results });
+    });
+});
+
+// Route to add a member to the branch
+router.post('/add-member', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    req.pool.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        const query = 'INSERT INTO UserBranch (user_id, branch_id) VALUES (?, ?)';
+
+        connection.query(query, [email, req.branchId], (error) => {
+            connection.release();
+
+            if (error) {
+                console.error(error);
+                if (error.code === 'ER_DUP_ENTRY') {
+                    return res.status(400).json({ message: 'User already a member of this branch' });
+                }
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            res.status(200).json({ message: 'Member added successfully' });
+        });
+    });
+});
+
+// Route to remove a member from the branch
+router.post('/remove-member', (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+        return res.status(400).json({ message: 'Email is required' });
+    }
+
+    req.pool.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        const query = 'DELETE FROM UserBranch WHERE user_id = ? AND branch_id = ?';
+
+        connection.query(query, [email, req.branchId], (error, results) => {
+            connection.release();
+
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            if (results.affectedRows === 0) {
+                return res.status(404).json({ message: 'User not found in this branch' });
+            }
+
+            res.status(200).json({ message: 'Member removed successfully' });
+        });
+    });
+});
+
 module.exports = router;
