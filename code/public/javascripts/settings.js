@@ -56,7 +56,6 @@ const vueApp = new Vue({
             },
             searchQuery: '',
             users: [],
-            filteredUsers: [],
             sortKey: '',
             sortOrders: {
                 firstName: 1,
@@ -64,15 +63,47 @@ const vueApp = new Vue({
                 email: 1,
                 phoneNumber: 1,
                 userType: 1
-            }
+            },
+            branches: []
         },
         loggedIn: false,
         userType: 'user',
+    },
+    computed: {
+        filteredUsers() {
+            let users = this.admin.users;
+
+            if (this.admin.searchQuery) {
+                const query = this.admin.searchQuery.toLowerCase();
+                users = users.filter(user => {
+                    return user.firstName.toLowerCase().includes(query) ||
+                        user.lastName.toLowerCase().includes(query) ||
+                        user.email.toLowerCase().includes(query) ||
+                        user.phoneNumber.toLowerCase().includes(query) ||
+                        user.userType.toLowerCase().includes(query);
+                });
+            }
+
+            if (this.admin.sortKey) {
+                users = users.slice().sort((a, b) => {
+                    let result = 0;
+                    if (typeof a[this.admin.sortKey] === 'string') {
+                        result = a[this.admin.sortKey].localeCompare(b[this.admin.sortKey]);
+                    } else if (typeof a[this.admin.sortKey] === 'number') {
+                        result = a[this.admin.sortKey] - b[this.admin.sortKey];
+                    }
+                    return result * this.admin.sortOrders[this.admin.sortKey];
+                });
+            }
+
+            return users;
+        }
     },
     mounted() {
         this.checkLoginStatus();
         this.getUserType();
         this.fetchUserInfo();
+        this.fetchBranches();
     },
     methods: {
         toggleSection(section) {
@@ -80,6 +111,9 @@ const vueApp = new Vue({
                 this.currentSection = section;
                 if (section === 'manager') {
                     this.fetchEvents();
+                }
+                if (section === 'admin') {
+                    this.fetchUsers();
                 }
             }
         },
@@ -197,35 +231,98 @@ const vueApp = new Vue({
             alert("Viewing event RSVPs");
         },
         addBranch() {
-            alert(`Adding branch: ${this.admin.addBranch.name}`);
+            if (!this.admin.addBranch.name || !this.admin.addBranch.phoneNumber || !this.admin.addBranch.email || !this.admin.addBranch.address.street || !this.admin.addBranch.address.streetNumber || !this.admin.addBranch.address.city || !this.admin.addBranch.address.state || !this.admin.addBranch.address.postalCode) {
+                alert('All fields are required');
+                return;
+            }
+            fetch('/admins/add-branch', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.admin.addBranch)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         deleteBranch() {
-            alert(`Deleting branch ID: ${this.admin.deleteBranch.id}`);
+            if (!this.admin.deleteBranch.id) {
+                alert('Branch ID is required');
+                return;
+            }
+            fetch('/admins/delete-branch', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id: this.admin.deleteBranch.id })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         setBranchManager() {
-            alert(`Setting manager for branch ID: ${this.admin.setManager.branchId}`);
+            if (!this.admin.setManager.branchId || !this.admin.setManager.email) {
+                alert('Both Branch ID and Manager Email are required');
+                return;
+            }
+            fetch('/admins/set-branch-manager', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.admin.setManager)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
-        searchUsers() {
-            this.filteredUsers = this.admin.users.filter(user => {
-                return user.firstName.toLowerCase().includes(this.admin.searchQuery.toLowerCase()) ||
-                    user.lastName.toLowerCase().includes(this.admin.searchQuery.toLowerCase()) ||
-                    user.email.toLowerCase().includes(this.admin.searchQuery.toLowerCase()) ||
-                    user.phoneNumber.toLowerCase().includes(this.admin.searchQuery.toLowerCase()) ||
-                    user.userType.toLowerCase().includes(this.admin.searchQuery.toLowerCase());
-            });
+        fetchBranches() {
+            fetch('/admins/branches')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.admin.branches = data.branches;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        fetchUsers() {
+            fetch('/admins/users')
+                .then(response => response.json())
+                .then(data => {
+                    this.admin.users = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         sortUsers(key) {
             this.admin.sortKey = key;
             this.admin.sortOrders[key] = this.admin.sortOrders[key] * -1;
-            this.filteredUsers.sort((a, b) => {
-                let result = 0;
-                if (typeof a[key] === 'string') {
-                    result = a[key].localeCompare(b[key]);
-                } else if (typeof a[key] === 'number') {
-                    result = a[key] - b[key];
-                }
-                return result * this.admin.sortOrders[key];
-            });
         },
         async checkLoginStatus() {
             try {
@@ -270,11 +367,6 @@ const vueApp = new Vue({
         'admin.searchQuery': 'searchUsers'
     },
     created() {
-        this.admin.users = [
-            { firstName: 'John', lastName: 'Doe', email: 'jd@example.com', phoneNumber: '1234567890', userType: 'admin' },
-            { firstName: 'Jack', lastName: 'R', email: 'JR@example.com', phoneNumber: '2345678901', userType: 'manager' },
-            { firstName: 'u', lastName: 'ser', email: 'us@example.com', phoneNumber: '3456789012', userType: 'user' }
-        ];
-        this.filteredUsers = this.admin.users;
+        this.fetchUsers();
     }
 });
