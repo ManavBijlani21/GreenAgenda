@@ -36,30 +36,44 @@ const vueApp = new Vue({
         ],
         test: "",
         loadPosts: true,
-        search: ""
+        search: "",
+        loggedIn: false
+    },
+    mounted() {
+        this.checkLoginStatus();  // Call the method when the component is mounted
     },
     computed: {
-        posts: function(){
-            if(this.loadPosts !== true) return [];
+        posts: function () {
+            if (this.loadPosts !== true) return [];
             var ans = [];
 
-            for (let post of this.posts1){
-                if(JSON.stringify(post).includes(this.search)) ans.push(post);
+            for (let post of this.posts1) {
+                if (JSON.stringify(post).includes(this.search)) ans.push(post);
             }
             return ans;
         }
     },
     methods: {
         //this method just extists for testing purposes not related to first milestone submission
-        RSVP: function(){
+        RSVP: function () {
             console.log("Hello World!");
             const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
+            xhttp.onload = function () {
                 vueApp.test = this.responseText;
                 console.log(vueApp.test);
             };
-            xhttp.open("GET", this.baseURL+"/test", true); //first is the type of request in caps, then the url
+            xhttp.open("GET", this.baseURL + "/test", true); //first is the type of request in caps, then the url
             xhttp.send();
+        },
+        async checkLoginStatus() {  // Method to check user login status
+            try {
+                const response = await fetch("/users/login-status");  // Send a request to the server to check login status
+                const data = await response.json();  // Parse the JSON response
+
+                this.loggedIn = data.loggedIn;  // Update the loggedIn data property
+            } catch (error) {
+                console.error(error);  // Log error to console
+            }
         }
     }
 });

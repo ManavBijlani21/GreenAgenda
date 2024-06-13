@@ -4,7 +4,7 @@ const vueApp = new Vue({
         currentSection: 'user',
         user: {
             email: '',
-            password: '',
+            password: '', // Password should not be pre-filled for security reasons
             firstName: '',
             lastName: '',
             phoneNumber: '',
@@ -64,14 +64,38 @@ const vueApp = new Vue({
                 phoneNumber: 1,
                 userType: 1
             }
-        }
+        },
+        loggedIn: false,
+        userType: 'user',
+    },
+    mounted() {
+        this.checkLoginStatus();
+        this.getUserType();
+        this.fetchUserInfo();
     },
     methods: {
         toggleSection(section) {
-            this.currentSection = section;
+            if (section == 'user' || (section == 'manager' && userType == 'manager') || (section == 'admin' && userType == 'admin')) {
+                this.currentSection = section;
+            }
         },
         saveUserChanges() {
-            alert("Saving user changes");
+            fetch('/users/update-user', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.user)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         saveManagerChanges() {
             alert("Saving manager changes");
@@ -121,6 +145,44 @@ const vueApp = new Vue({
                 }
                 return result * this.admin.sortOrders[key];
             });
+        },
+        async checkLoginStatus() {
+            try {
+                const response = await fetch("/users/login-status");
+                const data = await response.json();
+                if (!data.loggedIn) {
+                    alert("You are not logged in");
+                    window.location.href = "/login";
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async getUserType() {
+            try {
+                const response = await fetch("/users/user-type");
+                const data = await response.json();
+                this.userType = data.user_type;
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async fetchUserInfo() {
+            try {
+                const response = await fetch("/users/user-info");
+                const userInfo = await response.json();
+                this.user.email = userInfo.email || '';
+                this.user.firstName = userInfo.firstName || '';
+                this.user.lastName = userInfo.lastName || '';
+                this.user.phoneNumber = userInfo.phoneNumber || '';
+                this.user.address.street = userInfo.street || '';
+                this.user.address.streetNumber = userInfo.streetNumber || '';
+                this.user.address.city = userInfo.city || '';
+                this.user.address.state = userInfo.state || '';
+                this.user.address.postalCode = userInfo.postalCode || '';
+            } catch (error) {
+                console.error(error);
+            }
         }
     },
     watch: {

@@ -84,10 +84,11 @@ router.post('/signup', function (req, res, next) {
                 }
 
                 const addressId = results.insertId;  // Get the inserted address ID
+                const userType = 'user'; // Set user type to 'user'
 
                 // Insert new user into database
-                const insertQuery = 'INSERT INTO User (first_name, last_name, email_id, password, phone_number, address_id) VALUES (?, ?, ?, ?, ?, ?)';
-                connection.query(insertQuery, [firstName, lastName, email, hashedPassword, phone, addressId], function (error) {
+                const insertQuery = 'INSERT INTO User (first_name, last_name, email_id, password, phone_number, address_id, user_type) VALUES (?, ?, ?, ?, ?, ?, ?)';
+                connection.query(insertQuery, [firstName, lastName, email, hashedPassword, phone, addressId, userType], function (error) {
                     if (error) {
                         console.error(error);  // Log error to console
                         res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
