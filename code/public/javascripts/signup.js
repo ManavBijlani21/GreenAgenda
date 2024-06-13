@@ -1,41 +1,41 @@
 const vueApp = new Vue({
-    el: "#app",
-    data: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        phone: "",
-        streetNumber: "",
-        streetAddress: "",
-        city: "",
-        state: "",
-        postCode: ""
+    el : "#app",
+    data : {
+        firstName : "",
+        lastName : "",
+        email : "",
+        password : "",
+        phone : "",
+        streetNumber : "",
+        streetAddress : "",
+        city : "",
+        state : "",
+        postCode : ""
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
     },
-    computed: {
+    computed : {
     },
-    methods: {
+    methods : {
         async signUp() {  // Method to handle user signup
             try {
                 const response = await fetch("/accounts/signup", {
-                    method: "POST",  // Set the HTTP method to POST
-                    headers: {
+                    method : "POST",  // Set the HTTP method to POST
+                    headers : {
                         "Content-Type": "application/json"  // Set the request header to indicate JSON payload
                     },
-                    body: JSON.stringify({  // Convert the data to JSON string
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        email: this.email,
-                        password: this.password,
-                        phone: this.phone,
-                        streetNumber: this.streetNumber,
-                        streetAddress: this.streetAddress,
-                        city: this.city,
-                        state: this.state,
-                        postCode: this.postCode
+                    body : JSON.stringify({  // Convert the data to JSON string
+                        firstName : this.firstName,
+                        lastName : this.lastName,
+                        email : this.email,
+                        password : this.password,
+                        phone : this.phone,
+                        streetNumber : this.streetNumber,
+                        streetAddress : this.streetAddress,
+                        city : this.city,
+                        state : this.state,
+                        postCode : this.postCode
                     })
                 });
 

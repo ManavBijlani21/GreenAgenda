@@ -1,95 +1,95 @@
 const vueApp = new Vue({
-    el: '#app',
-    data: {
-        currentSection: 'user',
-        user: {
-            email: '',
-            password: '', // Password should not be pre-filled for security reasons
-            firstName: '',
-            lastName: '',
-            phoneNumber: '',
-            address: {
-                street: '',
-                streetNumber: '',
-                city: '',
-                state: '',
-                postalCode: ''
+    el : '#app',
+    data : {
+        currentSection : 'user',
+        user : {
+            email : '',
+            password : '', // Password should not be pre-filled for security reasons
+            firstName : '',
+            lastName : '',
+            phoneNumber : '',
+            address : {
+                street : '',
+                streetNumber : '',
+                city : '',
+                state : '',
+                postalCode : ''
             }
         },
-        manager: {
-            newEvent: {
-                title: '',
-                description: '',
-                date: '',
-                location: '',
-                visibility: 'public'
+        manager : {
+            newEvent : {
+                title : '',
+                description : '',
+                date : '',
+                location : '',
+                visibility : 'public'
             },
-            modifyEvent: {
-                id: '',
-                title: '',
-                description: '',
-                date: '',
-                location: '',
-                visibility: 'public'
+            modifyEvent : {
+                id : '',
+                title : '',
+                description : '',
+                date : '',
+                location : '',
+                visibility : 'public'
             },
-            events: [],
-            members: [],
-            newMemberEmail: '',
-            searchQuery: '',
-            sortKey: '',
-            sortOrders: {
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                phoneNumber: 1,
+            events : [],
+            members : [],
+            newMemberEmail : '',
+            searchQuery : '',
+            sortKey : '',
+            sortOrders : {
+                firstName : 1,
+                lastName : 1,
+                email : 1,
+                phoneNumber : 1,
             },
-            rsvps: [],
-            searchRSVPQuery: '',
-            selectedEventId: '',
-            sortRSVPKey: '',
-            sortRSVPOrders: {
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                status: 1
+            rsvps : [],
+            searchRSVPQuery : '',
+            selectedEventId : '',
+            sortRSVPKey : '',
+            sortRSVPOrders : {
+                firstName : 1,
+                lastName : 1,
+                email : 1,
+                status : 1
             }
         },
-        admin: {
-            addBranch: {
-                name: '',
-                phoneNumber: '',
-                email: '',
-                address: {
-                    street: '',
-                    streetNumber: '',
-                    city: '',
-                    state: '',
-                    postalCode: ''
+        admin : {
+            addBranch : {
+                name : '',
+                phoneNumber : '',
+                email : '',
+                address : {
+                    street : '',
+                    streetNumber : '',
+                    city : '',
+                    state : '',
+                    postalCode : ''
                 }
             },
             deleteBranch: {
-                id: ''
+                id : ''
             },
             setManager: {
-                branchId: '',
-                email: ''
+                branchId : '',
+                email : ''
             },
-            searchQuery: '',
-            users: [],
-            sortKey: '',
-            sortOrders: {
-                firstName: 1,
-                lastName: 1,
-                email: 1,
-                phoneNumber: 1,
+            searchQuery : '',
+            users : [],
+            sortKey : '',
+            sortOrders : {
+                firstName : 1,
+                lastName : 1,
+                email : 1,
+                phoneNumber : 1,
             },
-            branches: []
+            branches : []
         },
-        editedUsers: new Set(),
-        loggedIn: false,
-        userType: 'user',
+        editedUsers : new Set(),
+        loggedIn : false,
+        userType : 'user',
     },
-    computed: {
+    computed : {
         filteredUsers() {
             let users = this.admin.users;
 

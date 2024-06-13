@@ -1,15 +1,15 @@
 const vueApp = new Vue({
-    el: "#app",
-    data: {
-        email: "",
-        password: "",
+    el : "#app",
+    data : {
+        email : "",
+        password : "",
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
     },
-    computed: {
+    computed : {
     },
-    methods: {
+    methods : {
         async login() {  // Method to handle user login
             try {
                 const response = await fetch("/accounts/login", {
@@ -17,9 +17,9 @@ const vueApp = new Vue({
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({  // Convert the data to JSON string
-                        email: this.email,
-                        password: this.password
+                    body : JSON.stringify({  // Convert the data to JSON string
+                        email : this.email,
+                        password : this.password
                     })
                 });
 
@@ -28,8 +28,8 @@ const vueApp = new Vue({
                 }
 
                 alert("Login success");  // Show success alert
-
                 window.location.href = "/";  // Redirect to the home page after successful login
+                
             } catch (error) {
                 console.error(error);  // Log error to console
                 alert("Login failed");  // Show failure alert

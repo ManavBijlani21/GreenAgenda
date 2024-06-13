@@ -1,8 +1,8 @@
 const vueApp = new Vue({
-    el: "#app",
-    data: {
-        baseURL: "http://localhost:8080",
-        posts1: [
+    el : "#app",
+    data : {
+        baseURL : "http://localhost:8080",
+        posts1 : [
             {
                 title: "Title 1, most recent post",
                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pellentesque velit ut lacinia efficitur. Nam vitae aliquet massa. Proin mollis ante sem, nec posuere velit pellentesque vehicula. Proin rutrum, tellus a vulputate tincidunt, mauris turpis porttitor ante, non mattis elit est id augue. Vestibulum venenatis facilisis nibh, eget pharetra leo elementum non. Suspendisse eros est, tempus sit amet lobortis in, tempus nec sem.",

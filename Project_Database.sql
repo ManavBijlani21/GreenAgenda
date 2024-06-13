@@ -77,7 +77,8 @@ CREATE TABLE IF NOT EXISTS RSVP(
 CREATE TABLE IF NOT EXISTS UserBranch (
     user_id VARCHAR(255),
     branch_id INT,
-    PRIMARY KEY (user_id, branch_id),
+    PRIMARY KEY (user_id),
     FOREIGN KEY (user_id) REFERENCES User(email_id) ON DELETE CASCADE,
     FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE CASCADE
 );
+

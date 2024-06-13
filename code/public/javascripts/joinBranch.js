@@ -1,6 +1,6 @@
 const vueApp = new Vue({
-    el: "#app",
-    data: {
+    el : "#app",
+    data : {
         baseURL: "http://localhost:8080",
         loaded: true,
         loggedIn: true,
@@ -8,9 +8,9 @@ const vueApp = new Vue({
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
     },
-    computed: {
+    computed : {
     },
-    methods: {
+    methods : {
         async checkLoginStatus() {  // Method to check user login status
             try {
                 const response = await fetch("/users/login-status");  // Send a request to the server to check login status
