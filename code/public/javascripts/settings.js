@@ -43,6 +43,16 @@ const vueApp = new Vue({
                 email: 1,
                 phoneNumber: 1,
             },
+            rsvps: [],
+            searchRSVPQuery: '',
+            selectedEventId: '',
+            sortRSVPKey: '',
+            sortRSVPOrders: {
+                firstName: 1,
+                lastName: 1,
+                email: 1,
+                status: 1
+            }
         },
         admin: {
             addBranch: {
@@ -108,6 +118,33 @@ const vueApp = new Vue({
 
             return users;
         },
+        filteredRSVPs() {
+            let rsvps = this.manager.rsvps;
+
+            if (this.manager.searchRSVPQuery) {
+                const query = this.manager.searchRSVPQuery.toLowerCase();
+                rsvps = rsvps.filter(rsvp => {
+                    return rsvp.firstName.toLowerCase().includes(query) ||
+                        rsvp.lastName.toLowerCase().includes(query) ||
+                        rsvp.email.toLowerCase().includes(query) ||
+                        rsvp.status.toLowerCase().includes(query);
+                });
+            }
+
+            if (this.manager.sortRSVPKey) {
+                rsvps = rsvps.slice().sort((a, b) => {
+                    let result = 0;
+                    if (typeof a[this.manager.sortRSVPKey] === 'string') {
+                        result = a[this.manager.sortRSVPKey].localeCompare(b[this.manager.sortRSVPKey]);
+                    } else if (typeof a[this.manager.sortRSVPKey] === 'number') {
+                        result = a[this.manager.sortRSVPKey] - b[this.manager.sortRSVPKey];
+                    }
+                    return result * this.manager.sortRSVPOrders[this.manager.sortRSVPKey];
+                });
+            }
+
+            return rsvps;
+        },
         filteredMembers() {
             let members = this.manager.members;
 
@@ -159,9 +196,11 @@ const vueApp = new Vue({
             }
         },
         saveUserChanges(user) {
-            if (!user) {
+            if (!user || !user.email) {
                 user = this.user;
             }
+
+            console.log(user);
             fetch('/users/update-user', {
                 method: 'POST',
                 headers: {
@@ -337,8 +376,28 @@ const vueApp = new Vue({
         },
         searchMembers() {
         },
-        viewRSVPs() {
-            alert("Viewing event RSVPs");
+        fetchRSVPs() {
+            if (!this.manager.selectedEventId) {
+                return;
+            }
+            fetch(`/managers/rsvps/${this.manager.selectedEventId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.manager.rsvps = data.rsvps;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
+        sortRSVPs(key) {
+            this.manager.sortRSVPKey = key;
+            this.manager.sortRSVPOrders[key] = this.manager.sortRSVPOrders[key] * -1;
+        },
+        searchRSVPs() {
         },
         addBranch() {
             if (!this.admin.addBranch.name || !this.admin.addBranch.phoneNumber || !this.admin.addBranch.email || !this.admin.addBranch.address.street || !this.admin.addBranch.address.streetNumber || !this.admin.addBranch.address.city || !this.admin.addBranch.address.state || !this.admin.addBranch.address.postalCode) {

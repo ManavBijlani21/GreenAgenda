@@ -164,8 +164,34 @@
                 </div>
 
                 <h3>Event RSVPs</h3>
-                <label for="view-rsvp">View Event RSVPs:</label>
-                <button type="button" @click="viewRSVPs">View RSVPs</button>
+                <label for="view-rsvp-event-id">Select Event:</label>
+                <select id="view-rsvp-event-id" v-model="manager.selectedEventId" @change="fetchRSVPs">
+                    <option v-for="event in manager.events" :value="event.id">{{ event.title }}</option>
+                </select>
+
+                <label for="search-rsvps">Search RSVPs:</label>
+                <input type="text" id="search-rsvps" v-model="manager.searchRSVPQuery" @input="searchRSVPs">
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortRSVPs('firstName')">First Name</th>
+                                <th @click="sortRSVPs('lastName')">Last Name</th>
+                                <th @click="sortRSVPs('email')">Email</th>
+                                <th @click="sortRSVPs('status')">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="rsvp in filteredRSVPs" :key="rsvp.email">
+                                <td>{{ rsvp.firstName }}</td>
+                                <td>{{ rsvp.lastName }}</td>
+                                <td>{{ rsvp.email }}</td>
+                                <td>{{ rsvp.status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <button type="submit">Save Changes</button>
             </form>
