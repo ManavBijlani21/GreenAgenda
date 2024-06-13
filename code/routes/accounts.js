@@ -41,6 +41,7 @@ router.post('/login', function (req, res, next) {
                 }
 
                 req.session.email = user.email_id; // Store user email in session
+                req.session.userType = user.user_type; // Store user type in session
 
                 res.json({ message: "Login success" });  // Send success message
             });

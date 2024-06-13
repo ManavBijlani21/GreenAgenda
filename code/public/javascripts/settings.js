@@ -75,7 +75,7 @@ const vueApp = new Vue({
     },
     methods: {
         toggleSection(section) {
-            if (section == 'user' || (section == 'manager' && userType == 'manager') || (section == 'admin' && userType == 'admin')) {
+            if (section == 'user' || (section == 'manager' && this.userType == 'manager') || (section == 'admin' && this.userType == 'admin')) {
                 this.currentSection = section;
             }
         },
@@ -104,7 +104,26 @@ const vueApp = new Vue({
             alert("Saving admin changes");
         },
         addEvent() {
-            alert(`Adding event: ${this.manager.newEvent.title}`);
+            if (!this.manager.newEvent.title || !this.manager.newEvent.description || !this.manager.newEvent.date || !this.manager.newEvent.location) {
+                alert('All fields are required');
+                return;
+            }
+            fetch('/managers/add-event', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(this.manager.newEvent)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         },
         modifyEvent() {
             alert(`Modifying event ID: ${this.manager.modifyEvent.id}`);
@@ -162,7 +181,7 @@ const vueApp = new Vue({
             try {
                 const response = await fetch("/users/user-type");
                 const data = await response.json();
-                this.userType = data.user_type;
+                this.userType = data.userType;
             } catch (error) {
                 console.error(error);
             }

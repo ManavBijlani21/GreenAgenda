@@ -27,26 +27,11 @@ router.get('/login-status', function (req, res) {
 });
 
 router.get('/user-type', function (req, res) {
-    req.pool.getConnection(function (err, connection) {
-        if (err) {
-            res.sendStatus(500);
-            return;
-        }
-        const query = 'SELECT user_type FROM User WHERE email_id = ?';
-        connection.query(query, [req.session.email], function (error, results) {
-            connection.release();
-            if (error) {
-                console.error(error);
-                res.sendStatus(500);
-                return;
-            }
-            if (results.length === 0) {
-                res.sendStatus(404);
-                return;
-            }
-            res.json(results[0]);
-        });
-    });
+    if (req.session && req.session.userType) {
+        res.json({ userType: req.session.userType });
+    } else {
+        res.status(401).json({ message: "Unauthorized" });
+    }
 });
 
 // Route to get user information
