@@ -93,7 +93,6 @@ router.post('/update-user', (req, res) => {
 
     const email = req.session.email;
     const { password, firstName, lastName, phoneNumber, address } = req.body;
-    const { street, streetNumber, city, state, postalCode } = address;
 
     req.pool.getConnection((err, connection) => {
         if (err) {
@@ -101,32 +100,56 @@ router.post('/update-user', (req, res) => {
             return;
         }
 
-        // Update address
-        const updateAddressQuery = `
-            UPDATE Address
-            SET street = ?, street_number = ?, city = ?, state = ?, postal_code = ?
-            WHERE address_id = (SELECT address_id FROM User WHERE email_id = ?)
+        // Update user information
+        const updateUserQuery = `
+            UPDATE User
+            SET first_name = ?, last_name = ?, phone_number = ?
+            WHERE email_id = ?
         `;
-        connection.query(updateAddressQuery, [street, streetNumber, city, state, postalCode, email], (error) => {
+        connection.query(updateUserQuery, [firstName, lastName, phoneNumber, email], (error) => {
             if (error) {
                 connection.release();
                 res.status(500).json({ message: 'Internal server error' });
                 return;
             }
 
-            // Update user information
-            const updateUserQuery = `
-                UPDATE User
-                SET first_name = ?, last_name = ?, phone_number = ?
-                WHERE email_id = ?
-            `;
-            connection.query(updateUserQuery, [firstName, lastName, phoneNumber, email], (error) => {
-                if (error) {
-                    connection.release();
-                    res.status(500).json({ message: 'Internal server error' });
-                    return;
-                }
+            // Update address if it exists
+            if (address) {
+                const { street, streetNumber, city, state, postalCode } = address;
+                const updateAddressQuery = `
+                    UPDATE Address
+                    SET street = ?, street_number = ?, city = ?, state = ?, postal_code = ?
+                    WHERE address_id = (SELECT address_id FROM User WHERE email_id = ?)
+                `;
+                connection.query(updateAddressQuery, [street, streetNumber, city, state, postalCode, email], (error) => {
+                    if (error) {
+                        connection.release();
+                        res.status(500).json({ message: 'Internal server error' });
+                        return;
+                    }
 
+                    // Check if password is provided
+                    if (password) {
+                        const hashedPassword = bcrypt.hashSync(password, saltRounds);
+                        const updatePasswordQuery = `
+                            UPDATE User
+                            SET password = ?
+                            WHERE email_id = ?
+                        `;
+                        connection.query(updatePasswordQuery, [hashedPassword, email], (error) => {
+                            connection.release();
+                            if (error) {
+                                res.status(500).json({ message: 'Internal server error' });
+                                return;
+                            }
+                            res.json({ message: 'User information updated successfully' });
+                        });
+                    } else {
+                        connection.release();
+                        res.json({ message: 'User information updated successfully' });
+                    }
+                });
+            } else {
                 // Check if password is provided
                 if (password) {
                     const hashedPassword = bcrypt.hashSync(password, saltRounds);
@@ -147,10 +170,11 @@ router.post('/update-user', (req, res) => {
                     connection.release();
                     res.json({ message: 'User information updated successfully' });
                 }
-            });
+            }
         });
     });
 });
+
 
 
 

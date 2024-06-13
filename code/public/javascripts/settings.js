@@ -66,6 +66,7 @@ const vueApp = new Vue({
             },
             branches: []
         },
+        editedUsers: new Set(),
         loggedIn: false,
         userType: 'user',
     },
@@ -109,6 +110,9 @@ const vueApp = new Vue({
         toggleSection(section) {
             if (section == 'user' || (section == 'manager' && this.userType == 'manager') || (section == 'admin' && this.userType == 'admin')) {
                 this.currentSection = section;
+                if (section === 'user') {
+                    this.fetchUserInfo();
+                }
                 if (section === 'manager') {
                     this.fetchEvents();
                 }
@@ -117,23 +121,30 @@ const vueApp = new Vue({
                 }
             }
         },
-        saveUserChanges() {
+        saveUserChanges(user) {
+            if (!user) {
+                user = this.user;
+            }
             fetch('/users/update-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(this.user)
+                body: JSON.stringify(user)
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
                         alert(data.message);
                     }
+                    this.editedUsers.delete(user.email);
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
+        },
+        markUserAsEdited(user) {
+            this.editedUsers.add(user.email);
         },
         saveManagerChanges() {
             alert("Saving manager changes");
@@ -324,6 +335,7 @@ const vueApp = new Vue({
             this.admin.sortKey = key;
             this.admin.sortOrders[key] = this.admin.sortOrders[key] * -1;
         },
+        searchUsers() { },
         async checkLoginStatus() {
             try {
                 const response = await fetch("/users/login-status");

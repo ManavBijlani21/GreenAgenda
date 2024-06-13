@@ -196,28 +196,32 @@
                 <label for="search-users">Search Users:</label>
                 <input type="text" id="search-users" v-model="admin.searchQuery" @input="searchUsers">
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th @click="sortUsers('firstName')">First Name</th>
-                            <th @click="sortUsers('lastName')">Last Name</th>
-                            <th @click="sortUsers('email')">Email</th>
-                            <th @click="sortUsers('phoneNumber')">Phone Number</th>
-                            <th @click="sortUsers('userType')">User Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="user in filteredUsers" :key="user.email">
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.phoneNumber }}</td>
-                            <td>{{ user.userType }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortUsers('firstName')">First Name</th>
+                                <th @click="sortUsers('lastName')">Last Name</th>
+                                <th @click="sortUsers('email')">Email</th>
+                                <th @click="sortUsers('phoneNumber')">Phone Number</th>
+                                <th @click="sortUsers('userType')">User Type</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in filteredUsers" :key="user.email">
+                                <td><input type="text" v-model="user.firstName" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.lastName" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.email" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.phoneNumber" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.userType" @change="markUserAsEdited(user)"></td>
+                                <td><button type="button" @click="saveUserChanges(user)">Save</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <button type="submit">Save Changes</button>
+
             </form>
         </section>
         <footer>
