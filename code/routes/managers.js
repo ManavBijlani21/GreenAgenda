@@ -208,4 +208,25 @@ router.post('/remove-member', (req, res) => {
     });
 });
 
+// Route to fetch RSVPs for a specific event
+router.get('/rsvps/:eventId', (req, res) => {
+    const eventId = req.params.eventId;
+
+    const query = `
+        SELECT u.first_name AS firstName, u.last_name AS lastName, u.email_id AS email, r.status
+        FROM RSVP r
+        JOIN User u ON r.email_id = u.email_id
+        WHERE r.event_id = ?
+    `;
+
+    req.pool.query(query, [eventId], (error, results) => {
+        if (error) {
+            console.error(error);
+            res.status(500).json({ message: "Internal server error" });
+            return;
+        }
+        res.status(200).json({ rsvps: results });
+    });
+});
+
 module.exports = router;
