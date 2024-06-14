@@ -16,14 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `Website_Database`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `Website_Database` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-USE `Website_Database`;
-
---
 -- Table structure for table `Address`
 --
 
@@ -38,7 +30,7 @@ CREATE TABLE `Address` (
   `state` varchar(40) DEFAULT NULL,
   `postal_code` varchar(6) DEFAULT NULL,
   PRIMARY KEY (`address_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,6 +39,7 @@ CREATE TABLE `Address` (
 
 LOCK TABLES `Address` WRITE;
 /*!40000 ALTER TABLE `Address` DISABLE KEYS */;
+INSERT INTO `Address` VALUES (1,'Site Street','1a','Site City','Site State','5173'),(2,'City street','2','Adelaide','SA','9039'),(3,'Rundle Mall','456','Adelaide','SA','5000'),(4,'King William Street','123','Adelaide','SA','5000'),(5,'Gouger Street','789','Adelaide','SA','5000'),(6,'North Terrace','10','Adelaide','SA','5000'),(7,'Flinders Street','1-2','Adelaide','SA','5000'),(8,'Morphett Street','220','Adelaide','SA','5000'),(9,'Wakefield Street','90','Adelaide','SA','5000');
 /*!40000 ALTER TABLE `Address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +61,7 @@ CREATE TABLE `Branch` (
   KEY `manager_id` (`manager_id`),
   CONSTRAINT `Branch_ibfk_1` FOREIGN KEY (`address_id`) REFERENCES `Address` (`address_id`) ON DELETE CASCADE,
   CONSTRAINT `Branch_ibfk_2` FOREIGN KEY (`manager_id`) REFERENCES `User` (`email_id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,6 +70,7 @@ CREATE TABLE `Branch` (
 
 LOCK TABLES `Branch` WRITE;
 /*!40000 ALTER TABLE `Branch` DISABLE KEYS */;
+INSERT INTO `Branch` VALUES (3,'1234567890','morphetstreet@gmail.com',7,'manager.sarah@gmail.com'),(4,'0192992929','wakefieldstreet@gmail.com',8,'manager.ellie@gmail.com');
 /*!40000 ALTER TABLE `Branch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +97,7 @@ CREATE TABLE `Event` (
   KEY `branch_id` (`branch_id`),
   CONSTRAINT `Event_ibfk_1` FOREIGN KEY (`email_id`) REFERENCES `User` (`email_id`) ON DELETE SET NULL,
   CONSTRAINT `Event_ibfk_2` FOREIGN KEY (`branch_id`) REFERENCES `Branch` (`branch_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,35 +106,8 @@ CREATE TABLE `Event` (
 
 LOCK TABLES `Event` WRITE;
 /*!40000 ALTER TABLE `Event` DISABLE KEYS */;
+INSERT INTO `Event` VALUES (3,'Yoga day','International Day of Yoga holds significant importance globally as it promotes physical and\nmental well-being through ancient practices.','2024-06-14 08:00:18','2024-06-21','Morphett Street','public',1,'manager.sarah@gmail.com',3),(4,'Nature Day day','World Nature Conservation Day holds profound significance globally as it advocates for the protection and preservation\nof our natural environment.','2024-06-14 08:00:28','2024-12-21','wake field','private',1,'nicol33@gmail.com',4);
 /*!40000 ALTER TABLE `Event` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Job`
---
-
-DROP TABLE IF EXISTS `Job`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Job` (
-  `job_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(20) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `description` text,
-  `email_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`job_id`),
-  KEY `email_id` (`email_id`),
-  CONSTRAINT `Job_ibfk_1` FOREIGN KEY (`email_id`) REFERENCES `User` (`email_id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Job`
---
-
-LOCK TABLES `Job` WRITE;
-/*!40000 ALTER TABLE `Job` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Job` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -162,7 +129,7 @@ CREATE TABLE `RSVP` (
   KEY `event_id` (`event_id`),
   CONSTRAINT `RSVP_ibfk_1` FOREIGN KEY (`email_id`) REFERENCES `User` (`email_id`) ON DELETE CASCADE,
   CONSTRAINT `RSVP_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `Event` (`event_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,6 +138,7 @@ CREATE TABLE `RSVP` (
 
 LOCK TABLES `RSVP` WRITE;
 /*!40000 ALTER TABLE `RSVP` DISABLE KEYS */;
+INSERT INTO `RSVP` VALUES (3,'2024-06-19','2024-06-14 08:03:01','Confirmed','jessicam23@gmail.com',3),(4,'2024-12-10','2024-06-14 08:03:16','Confirmed','nicol33@gmail.com',4);
 /*!40000 ALTER TABLE `RSVP` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +170,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
+INSERT INTO `User` VALUES ('Jessica','Miller','0474720299','$2b$10$V9BlySFRAsLsW1d6iWKTSe/9vC0hpUaCwvgbQDh6zWEeInCXUA45C','participant','jessicam23@gmail.com',5),('Ellie','Brown','0203017590','$2b$10$1CTobs0bKZhMcuHVzcWEaO/sNXp1SCOyHiPdkBfHJw6JsVPoz0JpO','manager','manager.ellie@gmail.com',4),('Sarah','Johnson','0474702299','$2b$10$09FhZhI27Wtu9tD3l2GNw.ROKcQ2PVY3qFH7SU2LjIYQomYBmUODW','manager','manager.sarah@gmail.com',3),('Nicol','Moore','0234017590','$2b$10$o5FpqTBVEMAKKbkKcGEQIuy1Jh7NxOm5hg4vCrIWMAD10DA1MFwtu','participant','nicol33@gmail.com',6),('Temp','Admin',NULL,'$2b$10$de85wTQnLdk.Y3rXLjP.BOGpXC0pVMSQmRgqBceFzVYKPW0xNo9cS','admin','temp@testing.com',1);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,6 +197,7 @@ CREATE TABLE `UserBranch` (
 
 LOCK TABLES `UserBranch` WRITE;
 /*!40000 ALTER TABLE `UserBranch` DISABLE KEYS */;
+INSERT INTO `UserBranch` VALUES ('jessicam23@gmail.com',3),('nicol33@gmail.com',4);
 /*!40000 ALTER TABLE `UserBranch` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -240,4 +210,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-13 18:52:31
+-- Dump completed on 2024-06-14  8:04:28
