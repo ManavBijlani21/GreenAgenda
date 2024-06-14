@@ -4,7 +4,7 @@ var router = express.Router();
 
 router.use(function (req, res, next) {
     // Check if user session exists and user is an admin
-    if (req.session && req.session.email && req.session.userType === 'admin') {
+    if (req.session.loggedIn === true && req.session.userType === 'admin') {
         next();  // User is logged in as admin, proceed to the next middleware or route handler
     } else {
         res.status(401).json({ message: "Unauthorized" });  // User is not logged in as admin, send unauthorized response

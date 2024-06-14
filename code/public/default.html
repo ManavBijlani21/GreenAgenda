@@ -33,7 +33,7 @@
                     <li class="dropdown">
                         <a href="/branch">Branches</a>
                         <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a href="/branch"> {{ branch.name }} </a></li>
+                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
                         </ul>
                     </li>
                     <li><a href="/joinBranch">Join a Branch</a></li>

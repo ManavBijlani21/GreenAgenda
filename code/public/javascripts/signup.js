@@ -13,7 +13,8 @@ const vueApp = new Vue({
         postCode : "",
         admin: {
             branches: []
-        }
+        },
+        loggedIn: false
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted

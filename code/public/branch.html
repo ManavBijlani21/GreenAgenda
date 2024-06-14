@@ -34,7 +34,7 @@
                     <li class="dropdown">
                         <a href="/branch">Branches</a>
                         <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a href="/branch"> {{ branch.name }} </a></li>
+                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
                         </ul>
                     </li>
                     <li><a href="/joinBranch">Join a Branch</a></li>
@@ -64,11 +64,11 @@
             <div v-for="(post, index) in posts">
                 <div class="postWrapper">
                     <div class="post">
-                        <button type="button" v-if="post.RSVP" v-on:click="RSVP">
+                        <button type="button" v-if="post.RSVP" v-on:click="RSVP(post.event_id)">
                             RSVP
                         </button>
                         <h2>{{ post.title }}</h2>
-                        <sub> Event Time: {{ post.timestamp }} {{ post.date }} </sub>
+                        <sub> Event Time: {{ post.timestamp }} </sub>
                         <div class="hrWrapper">
                             <hr>
                         </div>

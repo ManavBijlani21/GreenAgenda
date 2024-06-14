@@ -5,7 +5,8 @@ const vueApp = new Vue({
         password : "",
         admin: {
             branches: []
-        }
+        },
+        loggedIn: false
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
