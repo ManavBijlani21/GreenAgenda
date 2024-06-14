@@ -1,6 +1,7 @@
 var express = require('express');
 const connection = require('../app'); // Adjust path as needed
 var router = express.Router();
+const nodemailer = require('nodemailer');
 
 router.use(function (req, res, next) {
     // Check if user session exists
@@ -61,6 +62,41 @@ router.get('/get-event/:id', (req, res) => {
     });
 });
 
+// Helper function to send email notifications
+const sendEmail = (managerEmail, user, eventName, eventDescription, eventDate, isNewEvent) => {
+    // Create a transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587, // gmail SMTP port is 587
+        secure: false,
+        auth: {
+            user: 'serenitysanctuary001@gmail.com',
+            pass: 'xodb mvbl jxfh ixyb'
+        }
+    });
+
+    // Define the email options based on whether it's a new or updated event
+    let subject = isNewEvent ? `New Event: ${eventName}` : `Updated Event: ${eventName}`;
+    let text = isNewEvent ? `Hi ${user.name},\n\nThere is a new event: ${eventName}.\n\nDescription: ${eventDescription}\nDate: ${eventDate}\n\nBest regards,\nBranch Manager`
+                           : `Hi ${user.name},\n\nThe event details have been updated: ${eventName}.\n\nNew Description: ${eventDescription}\nNew Date: ${eventDate}\n\nBest regards,\nBranch Manager`;
+
+    const mailOptions = {
+        from: `"Serenity Sanctuary Branch Manager" <${managerEmail}>`,
+        to: user.email,
+        replyTo: managerEmail,
+        subject: subject,
+        text: text
+    };
+
+    // Send the email
+    transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+            return console.log(error); // Log error if email fails to send
+        }
+        console.log(`Email sent to ${user.email}: ${info.response}`); // Log success message
+    });
+};
+
 // Route to add an event
 router.post('/add-event', (req, res) => {
     const { title, description, date, location, visibility } = req.body;
@@ -80,18 +116,39 @@ router.post('/add-event', (req, res) => {
         `;
 
         connection.query(query, [title, description, date, location, visibility, req.branchId, req.session.email], (error) => {
-            connection.release();
-
             if (error) {
+                connection.release();
                 console.error(error);
                 return res.status(500).json({ message: 'Internal server error' });
             }
 
-            res.status(200).json({ message: 'Event added successfully' });
+            // After successfully adding the event, notify branch members
+            const getUsersByBranch = `
+                SELECT u.email_id AS email, u.first_name AS name
+                FROM User u
+                JOIN UserBranch ub ON u.email_id = ub.user_id
+                WHERE ub.branch_id = ?
+            `;
+
+            connection.query(getUsersByBranch, [req.branchId], (error, results) => {
+                connection.release(); // Release the connection after all queries are done
+                if (error) {
+                    console.error('Error fetching users:', error);
+                    return res.status(500).json({ message: 'Internal server error' });
+                }
+
+                // Send email to each user
+                results.forEach(user => {
+                    sendEmail(req.session.email, user, title, description, date);
+                });
+
+                res.status(200).json({ message: 'Event added and notifications sent successfully' });
+            });
         });
     });
 });
 
+// update event details and notify branch members
 router.post('/modify-event', (req, res) => {
     const { id, title, description, date, location, visibility } = req.body;
 
@@ -104,25 +161,69 @@ router.post('/modify-event', (req, res) => {
             return res.status(500).json({ message: 'Internal server error' });
         }
 
-        const query = `
+        const getEventDataQuery = `
+            SELECT title, description, date
+            FROM Event
+            WHERE event_id = ? AND branch_id = ?
+        `;
+
+        const updateEventQuery = `
             UPDATE Event
             SET title = ?, description = ?, date = ?, location = ?, accessibility_status = ?
             WHERE event_id = ? AND branch_id = ?
         `;
 
-        connection.query(query, [title, description, date, location, visibility, id, req.branchId], (error, results) => {
-            connection.release();
-
+        connection.query(getEventDataQuery, [id, req.branchId], (error, results) => {
             if (error) {
-                console.error(error);
+                connection.release();
+                console.error('Error fetching event data:', error);
                 return res.status(500).json({ message: 'Internal server error' });
             }
 
-            if (results.affectedRows === 0) {
+            if (results.length === 0) {
+                connection.release();
                 return res.status(404).json({ message: 'Event not found' });
             }
 
-            res.status(200).json({ message: 'Event updated successfully' });
+            const eventData = results[0];
+            const oldTitle = eventData.title;
+            const oldDescription = eventData.description;
+            const oldDate = eventData.date;
+
+            connection.query(updateEventQuery, [title, description, date, location, visibility, id, req.branchId], (error, updateResults) => {
+                connection.release();
+
+                if (error) {
+                    console.error('Error updating event:', error);
+                    return res.status(500).json({ message: 'Internal server error' });
+                }
+
+                if (updateResults.affectedRows === 0) {
+                    return res.status(404).json({ message: 'Event not found' });
+                }
+
+                // After successfully updating the event, notify branch members
+                const getUsersByBranch = `
+                    SELECT u.email_id AS email, u.first_name AS name
+                    FROM User u
+                    JOIN UserBranch ub ON u.email_id = ub.user_id
+                    WHERE ub.branch_id = ?
+                `;
+
+                connection.query(getUsersByBranch, [req.branchId], (error, results) => {
+                    if (error) {
+                        console.error('Error fetching users:', error);
+                        return res.status(500).json({ message: 'Internal server error' });
+                    }
+
+                    // Send email to each user
+                    results.forEach(user => {
+                        sendEmail(req.session.email, user, title, description, date, false); // Pass false for isNewEvent
+                    });
+
+                    res.status(200).json({ message: 'Event updated and notifications sent successfully' });
+                });
+            });
         });
     });
 });

@@ -1,15 +1,22 @@
-# Run Instructions
+# Run Instructions, run in /code directory
 service mysql start
 service mysql start
 
+mysql (enter MYSQL CLI)
 
-mysql
-CREATE database Website_Database
+CREATE database Website_Database (creates a database within mysql)
+
+exit (mysql CLI exit to run CLI commands in terminal)
+
 mysql < database_backup.sql (Command to import the database dump)
-(After making the changes to the database)
-mysqldump --databases Website_Database > database_backup.sql
 
-npm start
+mysqldump --databases Website_Database > database_backup.sql (After making the changes to the database, or to save at anypoint)
+
+npm start (not server and DB running, next commands are to stop db and server)
+
+ctrl+c (stop the npm server running, has to be in the terminal the server was started in)
+
+service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
 
 # Template Repository for COMP SCI 2207/7207 Web & Database Computing (2023 Semester 1)
 

@@ -69,3 +69,22 @@
     text-wrap: wrap;
     text-align: center;
 }
+
+.autocomplete-dropdown {
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    z-index: 1000;
+    width: 90%;
+}
+
+.autocomplete-dropdown div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.autocomplete-dropdown div:hover {
+    background-color: #ddd;
+}

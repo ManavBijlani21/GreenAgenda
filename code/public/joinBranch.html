@@ -4,19 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Join a Branch
-    </title>
+    <title>Join a Branch</title>
     <link rel="stylesheet" href="stylesheets/default.css">
     <link rel="stylesheet" href="stylesheets/joinBranch.css">
-    <!-- Put the specific stylesheet for your page here
-        <link rel="stylesheet" href="stylesheets/style.css">
-        -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="javascripts/joinBranch.js" defer></script>
-    <!--put the specific script for your page above by renaming the path away from default.js
-
-        -->
 </head>
 
 <body>
@@ -52,10 +45,15 @@
             <div class="formWrapper">
                 <form v-if="loggedIn">
                     <h1>Sign up for Email Updates</h1>
-                    <p>Join a branch to get branch specific event information on your homepage.</p>
+                    <p>Join a branch to get branch-specific event information on your homepage.</p>
                     <sub>Branch Name</sub>
                     <div>
-                        <input type="text" placeholder="" v-model="branchName">
+                        <input type="text" placeholder="" v-model="branchName" @input="fetchBranches" @blur="hideDropdown" @focus="fetchBranches">
+                        <div v-if="showDropdown" class="autocomplete-dropdown">
+                            <div v-for="branch in filteredBranches" @mousedown.prevent="selectBranch(branch.branch_name)">
+                                {{ branch.branch_name }}
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <button type="button" v-on:click="getLogIn()">Join</button>
@@ -64,6 +62,7 @@
             </div>
         </section>
 
+        <!-- Footer section -->
         <footer>
             <div class="join">
                 <h2>Join Serenity Sanctuary</h2>
@@ -73,7 +72,7 @@
             <div class="footer-content">
                 <div class="contact-info">
                     <h3>Serenity Sanctuary</h3>
-                    <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>
+                    <p>Become a part of this wonderful community!</p>
                     <p>Email: info@mysite.com</p>
                     <p>Phone: 123-456-7890</p>
                     <p>Registered Charity: 12345-67</p>
@@ -86,12 +85,10 @@
                 <div class="quick-links">
                     <h3>Quick Links</h3>
                     <ul>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Support Us</a></li>
-                        <li><a href="#">Branches</a></li>
-                        <li><a href="#">Join a Branch</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="/about">About</a></li>
+                        <li><a href="/support">Support Us</a></li>
+                        <li><a href="/branch">Branches</a></li>
+                        <li><a href="/joinBranch">Join a Branch</a></li>
                     </ul>
                 </div>
             </div>
