@@ -116,34 +116,6 @@ LOCK TABLES `Event` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Job`
---
-
-DROP TABLE IF EXISTS `Job`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Job` (
-  `job_id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(20) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  `description` text,
-  `email_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`job_id`),
-  KEY `email_id` (`email_id`),
-  CONSTRAINT `Job_ibfk_1` FOREIGN KEY (`email_id`) REFERENCES `User` (`email_id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Job`
---
-
-LOCK TABLES `Job` WRITE;
-/*!40000 ALTER TABLE `Job` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Job` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `RSVP`
 --
 
@@ -240,4 +212,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-13 18:52:31
+-- Dump completed on 2024-06-14  3:30:29
