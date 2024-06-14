@@ -177,6 +177,7 @@ const vueApp = new Vue({
         this.checkLoginStatus();
         this.getUserType();
         this.fetchUserInfo();
+        this.fetchBranches();
     },
     methods: {
         toggleSection(section) {
@@ -466,7 +467,7 @@ const vueApp = new Vue({
                 });
         },
         fetchBranches() {
-            fetch('/admins/branches')
+            fetch('/accounts/branches')
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
@@ -494,15 +495,30 @@ const vueApp = new Vue({
             this.admin.sortOrders[key] = this.admin.sortOrders[key] * -1;
         },
         searchUsers() { },
+        logOut(){
+            fetch('/accounts/logout')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn === false){
+                    alert("Logged out successfully!");
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                alert('Log out failed!');
+                console.error('Error: ', error);
+            });
+        },
         async checkLoginStatus() {
             try {
-                const response = await fetch("/users/login-status");
+                const response = await fetch("/accounts/login-status");
                 const data = await response.json();
-                console.log(data);
-                if (!data.loggedIn) {
+                if (data.loggedIn !== true) {
                     alert("You are not logged in");
                     window.location.href = "/login";
                 }
+                console.log(data);
+                this.loggedIn = data.loggedIn;
             } catch (error) {
                 console.error(error);
             }

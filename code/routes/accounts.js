@@ -42,6 +42,7 @@ router.post('/login', function (req, res, next) {
 
                 req.session.email = user.email_id; // Store user email in session
                 req.session.userType = user.user_type; // Store user type in session
+                req.session.loggedIn = true; // Store that this user is logged in
 
                 res.json({ message: "Login success" });  // Send success message
             });
@@ -96,6 +97,10 @@ router.post('/signup', function (req, res, next) {
                         return;
                     }
 
+                    req.session.email = email;
+                    req.session.userType = 'participant';
+                    req.session.loggedIn = true;
+
                     res.json({ message: "Signup success" });  // Send success message if signup is successful
                 });
             });
@@ -104,7 +109,7 @@ router.post('/signup', function (req, res, next) {
 });
 
 //Establishing the connection with the database
-router.get('/result', function (req, res) {
+/*router.get('/result', function (req, res) {
     //Connect to the database
     req.pool.getConnection(function (err, connection) {
         //General error handling
@@ -125,6 +130,35 @@ router.get('/result', function (req, res) {
             res.send(JSON.stringify(rows)); //Send response
         });
     });
+});
+*/
+
+router.get('/branches', (req, res) => {
+    req.pool.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        const fetchBranchesQuery = 'SELECT Branch.branch_id AS id, CONCAT(Address.street, " ", Address.city) AS name FROM Branch INNER JOIN Address ON Branch.address_id = Address.address_id';
+
+        connection.query(fetchBranchesQuery, (error, results) => {
+            connection.release();
+            if (error) {
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            res.status(200).json({ branches: results });
+        });
+    });
+});
+
+router.get('/login-status', function (req, res) {
+    res.json( { loggedIn: req.session.loggedIn } );
+});
+
+router.get('/logout', function(req, res){
+    req.session.loggedIn = false;
+    res.json({ loggedIn: req.session.loggedIn});
 });
 
 module.exports = router;

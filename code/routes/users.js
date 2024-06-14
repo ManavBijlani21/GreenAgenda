@@ -18,14 +18,6 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/login-status', function (req, res) {
-    if (req.session && req.session.email) {
-        res.json({ loggedIn: true });
-    } else {
-        res.json({ loggedIn: false });
-    }
-});
-
 router.get('/user-type', function (req, res) {
     if (req.session && req.session.userType) {
         res.json({ userType: req.session.userType });
