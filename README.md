@@ -1,3 +1,6 @@
+Final Submission Video Link:
+https://youtu.be/2ThyL7p0Y3M?si=FateXiS8NIGS6620
+
 # Run Instructions, run in /code directory
 navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
 
