@@ -1,5 +1,6 @@
 # Run Instructions, run in /code directory
-service mysql start
+navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
+
 service mysql start
 
 mysql (enter MYSQL CLI)
