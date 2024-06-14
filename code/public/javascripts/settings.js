@@ -498,6 +498,7 @@ const vueApp = new Vue({
             try {
                 const response = await fetch("/users/login-status");
                 const data = await response.json();
+                console.log(data);
                 if (!data.loggedIn) {
                     alert("You are not logged in");
                     window.location.href = "/login";

@@ -122,7 +122,7 @@ router.get('/result', function (req, res) {
                 res.sendStatus(500);
                 return;
             }
-            res.json(rows); //Send response
+            res.send(JSON.stringify(rows)); //Send response
         });
     });
 });
