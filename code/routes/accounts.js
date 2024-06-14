@@ -145,6 +145,7 @@ router.post('/signup', function (req, res, next) {
 router.get('/branches', (req, res) => {
     req.pool.getConnection((err, connection) => {
         if (err) {
+            console.log(err);
             return res.status(500).json({ message: 'Internal server error' });
         }
 

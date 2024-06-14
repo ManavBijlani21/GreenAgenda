@@ -17,8 +17,6 @@ var branchesRouter = require('./routes/branches');  // Import the branches route
 //Create a pool (group) of connections to be used for connecting with SQL server
 var dbConnectionPool = mysql.createPool({
     host : 'localhost', //Location of database
-    user: 'root', // Add your MySQL username
-    password: 'your_password', // Add your MySQL password
     database : 'Website_Database'
 });
 
