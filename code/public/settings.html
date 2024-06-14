@@ -35,17 +35,13 @@
                     <li><a href="/joinBranch">Join a Branch</a></li>
                 </ul>
             </nav>
-            <div class="auth-buttons">
-                <a href="/login" class="login">Log In</a>
-                <a href="/signup" class="donate">Sign Up</a>
-            </div>
         </header>
 
         <section style="padding-top: 6.5vh;"></section>
         <div class="nav">
             <a href="#" @click="toggleSection('user')">My Account</a>
-            <a href="#" @click="toggleSection('manager')">Branch Manager Settings</a>
-            <a href="#" @click="toggleSection('admin')">Admin Settings</a>
+            <a v-if="userType == 'manager'" href="#" @click="toggleSection('manager')">Branch Manager Settings</a>
+            <a v-if="userType == 'admin'" href="#" @click="toggleSection('admin')">Admin Settings</a>
         </div>
         <section v-if="currentSection === 'user'" class="settings-section">
             <h2>User Settings</h2>
@@ -67,12 +63,20 @@
                 <label for="contact-number">Contact Number:</label>
                 <input type="text" id="contact-number" v-model="user.phoneNumber">
 
-                <label for="address">Address:</label>
-                <input type="text" id="street" v-model="user.address.street" placeholder="Street">
-                <input type="text" id="street-number" v-model="user.address.streetNumber" placeholder="Street Number">
-                <input type="text" id="city" v-model="user.address.city" placeholder="City">
-                <input type="text" id="state" v-model="user.address.state" placeholder="State">
-                <input type="text" id="postal-code" v-model="user.address.postalCode" placeholder="Postal Code">
+                <label for="street-number">Street Number:</label>
+                <input type="text" id="street-number" v-model="user.address.streetNumber">
+
+                <label for="street">Street:</label>
+                <input type="text" id="street" v-model="user.address.street">
+
+                <label for="city">City:</label>
+                <input type="text" id="city" v-model="user.address.city">
+
+                <label for="state">State:</label>
+                <input type="text" id="state" v-model="user.address.state">
+
+                <label for="postal-code">Postal Code:</label>
+                <input type="text" id="postal-code" v-model="user.address.postalCode">
 
                 <button type="submit">Save Changes</button>
             </form>
@@ -102,8 +106,10 @@
                 <button type="button" @click="addEvent">Add Event</button>
 
                 <h3>Modify Branch Event</h3>
-                <label for="modify-event-id">Event ID:</label>
-                <input type="text" id="modify-event-id" v-model="manager.modifyEvent.id">
+                <label for="modify-event-id">Select Event:</label>
+                <select id="modify-event-id" v-model="manager.modifyEvent.id" @change="fetchEventDetails">
+                    <option v-for="event in manager.events" :value="event.id">{{ event.title }}</option>
+                </select>
 
                 <label for="modify-event-title">New Event Title:</label>
                 <input type="text" id="modify-event-title" v-model="manager.modifyEvent.title">
@@ -126,12 +132,66 @@
                 <button type="button" @click="modifyEvent">Modify Event</button>
 
                 <h3>Branch Members</h3>
-                <label for="view-members">View Branch Members:</label>
-                <button type="button" @click="viewMembers">View Members</button>
+                <label for="new-member-email">Add Member by Email:</label>
+                <input type="email" id="new-member-email" v-model="manager.newMemberEmail">
+                <button type="button" @click="addMember">Add Member</button>
+
+                <h4>Members List</h4>
+                <label for="search-members">Search Members:</label>
+                <input type="text" id="search-members" v-model="manager.searchQuery" @input="searchMembers">
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortMembers('firstName')">First Name</th>
+                                <th @click="sortMembers('lastName')">Last Name</th>
+                                <th @click="sortMembers('email')">Email</th>
+                                <th @click="sortMembers('phoneNumber')">Phone Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="member in filteredMembers" :key="member.email">
+                                <td>{{ member.firstName }}</td>
+                                <td>{{ member.lastName }}</td>
+                                <td>{{ member.email }}</td>
+                                <td>{{ member.phoneNumber }}</td>
+                                <td><button type="button" @click="removeMember(member.email)">Remove</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <h3>Event RSVPs</h3>
-                <label for="view-rsvp">View Event RSVPs:</label>
-                <button type="button" @click="viewRSVPs">View RSVPs</button>
+                <label for="view-rsvp-event-id">Select Event:</label>
+                <select id="view-rsvp-event-id" v-model="manager.selectedEventId" @change="fetchRSVPs">
+                    <option v-for="event in manager.events" :value="event.id">{{ event.title }}</option>
+                </select>
+
+                <label for="search-rsvps">Search RSVPs:</label>
+                <input type="text" id="search-rsvps" v-model="manager.searchRSVPQuery" @input="searchRSVPs">
+
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortRSVPs('firstName')">First Name</th>
+                                <th @click="sortRSVPs('lastName')">Last Name</th>
+                                <th @click="sortRSVPs('email')">Email</th>
+                                <th @click="sortRSVPs('status')">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="rsvp in filteredRSVPs" :key="rsvp.email">
+                                <td>{{ rsvp.firstName }}</td>
+                                <td>{{ rsvp.lastName }}</td>
+                                <td>{{ rsvp.email }}</td>
+                                <td>{{ rsvp.status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
                 <button type="submit">Save Changes</button>
             </form>
@@ -149,26 +209,37 @@
                 <label for="add-branch-email">Branch Email:</label>
                 <input type="email" id="add-branch-email" v-model="admin.addBranch.email">
 
-                <label for="add-branch-address">Branch Address:</label>
-                <input type="text" id="branch-street" v-model="admin.addBranch.address.street" placeholder="Street">
-                <input type="text" id="branch-street-number" v-model="admin.addBranch.address.streetNumber"
-                    placeholder="Street Number">
-                <input type="text" id="branch-city" v-model="admin.addBranch.address.city" placeholder="City">
-                <input type="text" id="branch-state" v-model="admin.addBranch.address.state" placeholder="State">
-                <input type="text" id="branch-postal-code" v-model="admin.addBranch.address.postalCode"
-                    placeholder="Postal Code">
+                <h4>Branch Address</h4>
+                <label for="branch-street-number">Street Number:</label>
+                <input type="text" id="branch-street-number" v-model="admin.addBranch.address.streetNumber">
+
+                <label for="branch-street">Street:</label>
+                <input type="text" id="branch-street" v-model="admin.addBranch.address.street">
+
+                <label for="branch-city">City:</label>
+                <input type="text" id="branch-city" v-model="admin.addBranch.address.city">
+
+                <label for="branch-state">State:</label>
+                <input type="text" id="branch-state" v-model="admin.addBranch.address.state">
+
+                <label for="branch-postal-code">Postal Code:</label>
+                <input type="text" id="branch-postal-code" v-model="admin.addBranch.address.postalCode">
 
                 <button type="button" @click="addBranch">Add Branch</button>
 
                 <h3>Delete Branch</h3>
-                <label for="delete-branch-id">Branch ID:</label>
-                <input type="text" id="delete-branch-id" v-model="admin.deleteBranch.id">
+                <label for="delete-branch-id">Branch Name:</label>
+                <select id="delete-branch-id" v-model="admin.deleteBranch.id">
+                    <option v-for="branch in admin.branches" :value="branch.id">{{ branch.name }}</option>
+                </select>
 
                 <button type="button" @click="deleteBranch">Delete Branch</button>
 
                 <h3>Set Manager of Branch</h3>
-                <label for="set-manager-branch-id">Branch ID:</label>
-                <input type="text" id="set-manager-branch-id" v-model="admin.setManager.branchId">
+                <label for="set-manager-branch-id">Branch Name:</label>
+                <select id="set-manager-branch-id" v-model="admin.setManager.branchId">
+                    <option v-for="branch in admin.branches" :value="branch.id">{{ branch.name }}</option>
+                </select>
 
                 <label for="set-manager-email">Manager Email:</label>
                 <input type="email" id="set-manager-email" v-model="admin.setManager.email">
@@ -179,28 +250,30 @@
                 <label for="search-users">Search Users:</label>
                 <input type="text" id="search-users" v-model="admin.searchQuery" @input="searchUsers">
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th @click="sortUsers('firstName')">First Name</th>
-                            <th @click="sortUsers('lastName')">Last Name</th>
-                            <th @click="sortUsers('email')">Email</th>
-                            <th @click="sortUsers('phoneNumber')">Phone Number</th>
-                            <th @click="sortUsers('userType')">User Type</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="user in filteredUsers" :key="user.email">
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.phoneNumber }}</td>
-                            <td>{{ user.userType }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th @click="sortUsers('firstName')">First Name</th>
+                                <th @click="sortUsers('lastName')">Last Name</th>
+                                <th @click="sortUsers('email')">Email</th>
+                                <th @click="sortUsers('phoneNumber')">Phone Number</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="user in filteredUsers" :key="user.email">
+                                <td><input type="text" v-model="user.firstName" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.lastName" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.email" @change="markUserAsEdited(user)"></td>
+                                <td><input type="text" v-model="user.phoneNumber" @change="markUserAsEdited(user)"></td>
+                                <td><button type="button" @click="saveUserChanges(user)">Save</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-                <button type="submit">Save Changes</button>
+
             </form>
         </section>
         <footer>

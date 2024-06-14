@@ -1,133 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>
-            About Us
-        </title>
-        <link rel=stylesheet href="stylesheets/default.css">
-        <link rel="stylesheet" href="stylesheets/about.css">
 
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        <script src="javascripts/about.js" defer></script>
-    </head>
-    <body>
-        <div id="app">
-            <header>
-                <a href="/">
-                    <div class="logo">
-                        <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
-                    </div>
-                </a>
-                <nav>
-                    <ul>
-                        <li><a href="/about">About</a></li>
-                        <li><a href="/support">Support Us</a></li>
-                        <li class="dropdown">
-                            <a href="/branch">Branches</a>
-                            <ul class="dropdown-content">
-                                <li><a href="/branch">Branch 1</a></li>
-                                <li><a href="/branch">Branch 2</a></li>
-                                <li><a href="/branch">Branch 3</a></li>
-                                <li><a href="/branch">Branch 4</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="/joinBranch">Join a Branch</a></li>
-                    </ul>
-                </nav>
-                <div class="auth-buttons">
-                    <a href="/login" class="login">Log In</a>
-                    <a href="/signup" class="donate">Sign Up</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        About Us
+    </title>
+    <link rel=stylesheet href="stylesheets/default.css">
+    <link rel="stylesheet" href="stylesheets/about.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="javascripts/about.js" defer></script>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <a href="/">
+                <div class="logo">
+                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
                 </div>
-            </header>
-
-            <div id = "belief" style = "font-family:Arial, Helvetica, sans-serif">
-                <p>We believe in creating a nurturing environment where individuals</p>
-                <p>can find inner peace, build resilience, and create positive change</p>
-                <p>in their lives and communities</p>
-            </div>
-
-            <table>
-                <tr>
-                    <td>
-
-                        <div class = "mission_text">
-                            <h1> Our Mission </h1>
-                            <br>
-                            <p>At Serenity Sanctuary, we're dedicated to decreasing poverty through compassionate action.</p>
-                            <p>Our mission is to empower individuals and families by providing numerous essential resources, education, and opportunities.</p>
-                            <p>Through collaborative partnerships and volunteer opportunities, we work to break the cycle of poverty and create pathways to a brighter future.</p>
-                            <p>Join us in making a meaningful impact and bringing hope to those in need.</p>
-                            </div>
-
-                    </td>
-
-                    <td>
-                        <div >
-                            <img src = "images/about_page_1.jpeg" alt="mission image" class = "mission_image">
-                            </div>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div>
-                        <img src = "images/about_page_2.jpeg" alt="vision image" class = "vision_image">
-                        </div>
-                    </td>
-                    <td>
-                        <div class = "vision_text">
-                        <h1>Our Vision</h1>
-                        <p>At Serenity Sanctuary, we envision a world free from the grips of poverty, where every individual has the opportunity to thrive and reach their full potential. </p>
-                        <p>We strive to create a society where no one feels left out, and everyone has access to the resources and support they need to lead dignified and fulfilling lives.</p>
-                        <p>Through our charitable initiatives and commitment for the betterment of the community, we aspire to build a future where poverty is a thing of the past, and compassion.</p>
-                        <p>Join us in turning this vision into reality and making a lasting difference in the fight against poverty.</p>
-                        </div>
-                    </td>
-
-                </tr>
-            </table>
-
-            <div id = "join_us">
-                <p>Join Us in Nurturing Change</p>
-                <button type="button">Get Involved</button>
-            </div>
-
-
-
-            <footer>
-                <div class="join">
-                    <h2>Join Serenity Sanctuary</h2>
-                    <p>Support Our Cause</p>
-                    <button type="button">Sign Up</button>
-                </div>
-                <div class="footer-content">
-                    <div class="contact-info">
-                        <h3>Serenity Sanctuary</h3>
-                        <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>
-                        <p>Email: info@mysite.com</p>
-                        <p>Phone: 123-456-7890</p>
-                        <p>Registered Charity: 12345-67</p>
-                    </div>
-                    <div class="newsletter">
-                        <h3>Get Monthly Updates</h3>
-                        <input type="email" placeholder="Enter your email here *">
-                        <button type="button">Sign Up!</button>
-                    </div>
-                    <div class="quick-links">
-                        <h3>Quick Links</h3>
-                        <ul>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Support Us</a></li>
-                            <li><a href="#">Branches</a></li>
-                            <li><a href="#">Join a Branch</a></li>
-                            <li><a href="#">Events</a></li>
-                            <li><a href="#">Contact</a></li>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/support">Support Us</a></li>
+                    <li class="dropdown">
+                        <a href="/branch">Branches</a>
+                        <ul class="dropdown-content">
+                            <li><a href="/branch">Branch 1</a></li>
+                            <li><a href="/branch">Branch 2</a></li>
+                            <li><a href="/branch">Branch 3</a></li>
+                            <li><a href="/branch">Branch 4</a></li>
                         </ul>
-                    </div>
-                </div>
-            </footer>
+                    </li>
+                    <li><a href="/joinBranch">Join a Branch</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a v-if="loggedIn" href="/settings" class="donate">Settings</a>
+                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
+                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
+            </div>
+        </header>
+
+        <div id="belief" style="font-family:Arial, Helvetica, sans-serif">
+            <p>We believe in creating a nurturing environment where individuals</p>
+            <p>can find inner peace, build resilience, and create positive change</p>
+            <p>in their lives and communities</p>
         </div>
-    </body>
+
+        <table>
+            <tr>
+                <td>
+
+                    <div class="mission_text">
+                        <h1> Our Mission </h1>
+                        <br>
+                        <p>At Serenity Sanctuary, we're dedicated to decreasing poverty through compassionate action.
+                        </p>
+                        <p>Our mission is to empower individuals and families by providing numerous essential resources,
+                            education, and opportunities.</p>
+                        <p>Through collaborative partnerships and volunteer opportunities, we work to break the cycle of
+                            poverty and create pathways to a brighter future.</p>
+                        <p>Join us in making a meaningful impact and bringing hope to those in need.</p>
+                    </div>
+
+                </td>
+
+                <td>
+                    <div>
+                        <img src="images/about_page_1.jpeg" alt="mission image" class="mission_image">
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div>
+                        <img src="images/about_page_2.jpeg" alt="vision image" class="vision_image">
+                    </div>
+                </td>
+                <td>
+                    <div class="vision_text">
+                        <h1>Our Vision</h1>
+                        <p>At Serenity Sanctuary, we envision a world free from the grips of poverty, where every
+                            individual has the opportunity to thrive and reach their full potential. </p>
+                        <p>We strive to create a society where no one feels left out, and everyone has access to the
+                            resources and support they need to lead dignified and fulfilling lives.</p>
+                        <p>Through our charitable initiatives and commitment for the betterment of the community, we
+                            aspire to build a future where poverty is a thing of the past, and compassion.</p>
+                        <p>Join us in turning this vision into reality and making a lasting difference in the fight
+                            against poverty.</p>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+
+        <div id="join_us">
+            <p>Join Us in Nurturing Change</p>
+            <button type="button">Get Involved</button>
+        </div>
+
+
+
+        <footer>
+            <div class="join">
+                <h2>Join Serenity Sanctuary</h2>
+                <p>Support Our Cause</p>
+                <button type="button">Sign Up</button>
+            </div>
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Serenity Sanctuary</h3>
+                    <p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>
+                    <p>Email: info@mysite.com</p>
+                    <p>Phone: 123-456-7890</p>
+                    <p>Registered Charity: 12345-67</p>
+                </div>
+                <div class="newsletter">
+                    <h3>Get Monthly Updates</h3>
+                    <input type="email" placeholder="Enter your email here *">
+                    <button type="button">Sign Up!</button>
+                </div>
+                <div class="quick-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Support Us</a></li>
+                        <li><a href="#">Branches</a></li>
+                        <li><a href="#">Join a Branch</a></li>
+                        <li><a href="#">Events</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
 </html>

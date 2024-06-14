@@ -1,18 +1,8 @@
-CREATE DATABASE Website_Database;
+CREATE DATABASE IF NOT EXISTS Website_Database;
 
- Use Website_Database;
+USE Website_Database;
 
- CREATE TABLE User (
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    phone_number CHAR(10),
-    password VARCHAR(50) NOT NULL,
-    user_type VARCHAR(15),
-    email_id VARCHAR(255) UNIQUE,
-    PRIMARY KEY (email_id)
- );
-
- CREATE TABLE Address(
+CREATE TABLE IF NOT EXISTS Address(
     address_id INT NOT NULL AUTO_INCREMENT,
     street VARCHAR(100),
     street_number VARCHAR(10),
@@ -20,22 +10,33 @@ CREATE DATABASE Website_Database;
     state VARCHAR(40),
     postal_code VARCHAR(6),
     PRIMARY KEY (address_id)
- );
+);
 
-ALTER TABLE User ADD COLUMN address_id INT NOT NULL;
-
-ALTER TABLE User ADD FOREIGN KEY (address_id) REFERENCES Address(address_id) ON DELETE CASCADE;
-
-CREATE TABLE Branch(
-    branch_id INT NOT NULL AUTO_INCREMENT,
-    PRIMARY KEY(branch_id),
-    branch_phone_number char(10),
-    branch_email_id varchar(255),
+CREATE TABLE IF NOT EXISTS User (
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    phone_number CHAR(10),
+    password VARCHAR(255) NOT NULL,
+    user_type VARCHAR(15),
+    email_id VARCHAR(255) UNIQUE,
     address_id INT,
+    PRIMARY KEY (email_id),
     FOREIGN KEY (address_id) REFERENCES Address(address_id) ON DELETE CASCADE
 );
 
-CREATE TABLE Job(
+CREATE TABLE IF NOT EXISTS Branch(
+    branch_id INT NOT NULL AUTO_INCREMENT,
+    branch_name VARCHAR(100),
+    PRIMARY KEY(branch_id),
+    branch_phone_number CHAR(10),
+    branch_email_id VARCHAR(255),
+    address_id INT,
+    manager_id VARCHAR(255),
+    FOREIGN KEY (address_id) REFERENCES Address(address_id) ON DELETE CASCADE,
+    FOREIGN KEY (manager_id) REFERENCES User(email_id) ON DELETE SET NULL
+);
+
+CREATE TABLE IF NOT EXISTS Job(
     job_id INT NOT NULL AUTO_INCREMENT,
     PRIMARY KEY(job_id),
     title VARCHAR(20),
@@ -45,7 +46,7 @@ CREATE TABLE Job(
     FOREIGN KEY (email_id) REFERENCES User(email_id) ON DELETE SET NULL
 );
 
-CREATE TABLE Event(
+CREATE TABLE IF NOT EXISTS Event(
     event_id INT AUTO_INCREMENT,
     PRIMARY KEY(event_id),
     title VARCHAR(255),
@@ -61,8 +62,7 @@ CREATE TABLE Event(
     FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE CASCADE
 );
 
-
-CREATE TABLE RSVP(
+CREATE TABLE IF NOT EXISTS RSVP(
     rsvp_id INT AUTO_INCREMENT,
     PRIMARY KEY(rsvp_id),
     date DATE,
@@ -74,13 +74,11 @@ CREATE TABLE RSVP(
     FOREIGN KEY (event_id) REFERENCES Event(event_id) ON DELETE CASCADE
 );
 
-ALTER TABLE User MODIFY password VARCHAR(255);
-
-ALTER TABLE Branch ADD COLUMN manager_id varchar(255);
-
-ALTER TABLE Branch ADD FOREIGN KEY (manager_id) REFERENCES User(email_id) ON DELETE SET NULL;
-
-
-
-
+CREATE TABLE IF NOT EXISTS UserBranch (
+    user_id VARCHAR(255),
+    branch_id INT,
+    PRIMARY KEY (user_id),
+    FOREIGN KEY (user_id) REFERENCES User(email_id) ON DELETE CASCADE,
+    FOREIGN KEY (branch_id) REFERENCES Branch(branch_id) ON DELETE CASCADE
+);
 
