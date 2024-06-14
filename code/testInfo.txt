@@ -2,7 +2,7 @@
 //+------------+-----------+--------------+--------------------------------------------------------------+-----------+------------------+------------+
 //| first_name | last_name | phone_number | password            | user_type | email_id         | address_id |
 //+------------+-----------+--------------+--------------------------------------------------------------+-----------+------------------+------------+
-//| Temp       | Admin     | NULL         | tempTestingPassword | admin     | temp@testing.com |          1 |
+//| Temp       | Admin     | NULL         | tempTestingPassword2| admin     | temp@testing.com |          1 |
 //+------------+-----------+--------------+--------------------------------------------------------------+-----------+------------------+------------+
 
 managers:
@@ -13,4 +13,4 @@ INSERT INTO User VALUES('Ellie', 'Brown', '0203017590', 'passtime', 'manager', '
 users:
 INSERT INTO User VALUES('Jessica', 'Miller', '0474720299', 'whatever@know', 'participant', 'jessicam23@gmail.com', 5);
 
-INSERT INTO User VALUES('Nicol', 'Moore', '0234017590', 'tall_smash', 'participant', 'nicol33@gmail.com', 6);
+INSERT INTO User VALUES('Nicol', 'Moore', '0234017590', '555', 'participant', 'nicol33@gmail.com', 6);
