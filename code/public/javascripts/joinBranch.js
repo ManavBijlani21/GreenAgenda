@@ -3,22 +3,49 @@ const vueApp = new Vue({
     data: {
         baseURL: "http://localhost:8080",
         loaded: true,
-        loggedIn: false,  // Initialize as false to prevent form flashing
-        branchName: '',  // Bind to the input field
-        branches: [],  // Store fetched branches
-        filteredBranches: [],  // Store branches matching the input
-        showDropdown: false  // Control the visibility of the dropdown
+        loggedIn: true,
+        admin: {
+            branches: []
+        }
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
+        this.fetchBranches();
     },
-    methods: {
+    computed : {
+    },
+    methods : {
+        logOut(){
+            fetch('/accounts/logout')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn === false){
+                    alert("Logged out successfully!");
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                alert('Log out failed!');
+                console.error('Error: ', error);
+            });
+        },
+        fetchBranches() {
+            fetch('/accounts/branches')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.admin.branches = data.branches;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
         async checkLoginStatus() {  // Method to check user login status
             try {
-                const response = await fetch("/users/login-status");  // Send a request to the server to check login status
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
+                const response = await fetch("/accounts/login-status");  // Send a request to the server to check login status
                 const data = await response.json();  // Parse the JSON response
                 console.log(data);  // Debugging: Log the response data
                 this.loggedIn = data.loggedIn;  // Update the loggedIn data property

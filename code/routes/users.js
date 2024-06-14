@@ -6,7 +6,7 @@ var router = express.Router();
 
 router.use(function (req, res, next) {
     // Check if user session exists
-    if (req.session && req.session.email) {
+    if (req.session.loggedIn === true) {
         next();  // User is logged in, proceed to the next middleware or route handler
     } else {
         res.status(401).json({ message: "Unauthorized" });  // User is not logged in, send unauthorized response
@@ -16,14 +16,6 @@ router.use(function (req, res, next) {
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
-});
-
-router.get('/login-status', function (req, res) {
-    if (req.session && req.session.email) {
-        res.json({ loggedIn: true });
-    } else {
-        res.json({ loggedIn: false });
-    }
 });
 
 router.get('/user-type', function (req, res) {
@@ -175,7 +167,23 @@ router.post('/update-user', (req, res) => {
     });
 });
 
+router.post('/RSVP', function(req, res){
+    res.status(500).json({ message: 'Under construction, coming soon!'});
 
+    
+    req.pool.getConnection((err, connection) => {
+        if(err){
+            console.log(err);
+            res.status(500).json({ message: "Server error, try again later."});
+        }
+
+        const query = 'INSERT INTO ';
+
+        connection.query(query, [], function(error, results){
+
+        });
+    });
+});
 
 
 module.exports = router;

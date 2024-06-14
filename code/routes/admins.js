@@ -4,30 +4,11 @@ var router = express.Router();
 
 router.use(function (req, res, next) {
     // Check if user session exists and user is an admin
-    if (req.session && req.session.email && req.session.userType === 'admin') {
+    if (req.session.loggedIn === true && req.session.userType === 'admin') {
         next();  // User is logged in as admin, proceed to the next middleware or route handler
     } else {
         res.status(401).json({ message: "Unauthorized" });  // User is not logged in as admin, send unauthorized response
     }
-});
-
-router.get('/branches', (req, res) => {
-    req.pool.getConnection((err, connection) => {
-        if (err) {
-            return res.status(500).json({ message: 'Internal server error' });
-        }
-
-        const fetchBranchesQuery = 'SELECT branch_id AS id, branch_name AS name FROM Branch';
-
-        connection.query(fetchBranchesQuery, (error, results) => {
-            connection.release();
-            if (error) {
-                return res.status(500).json({ message: 'Internal server error' });
-            }
-
-            res.status(200).json({ branches: results });
-        });
-    });
 });
 
 // Route to add a branch

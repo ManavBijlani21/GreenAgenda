@@ -9,6 +9,7 @@ router.post('/login', function (req, res, next) {
     req.pool.getConnection(function (err, connection) {
 
         if (err) {
+            connection.release();
             res.sendStatus(500);
             return;
         }
@@ -18,11 +19,13 @@ router.post('/login', function (req, res, next) {
         connection.query(query, [email], function (error, results) {
             if (error) {
                 console.error(error);  // Log error to console
+                connection.release();
                 res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
                 return;
             }
 
             if (results.length === 0) {
+                connection.release();
                 res.status(401).json({ message: "Login failed - No User" });  // Send 401 status if no user found
                 return;
             }
@@ -36,12 +39,16 @@ router.post('/login', function (req, res, next) {
                 }
 
                 if (!result) {
+                    connection.release();
                     res.status(401).json({ message: "Login failed - Wrong Password" });  // Send 401 status if password doesn't match
                     return;
                 }
 
+                connection.release();
+
                 req.session.email = user.email_id; // Store user email in session
                 req.session.userType = user.user_type; // Store user type in session
+                req.session.loggedIn = true; // Store that this user is logged in
 
                 res.json({ message: "Login success" });  // Send success message
             });
@@ -53,8 +60,8 @@ router.post('/login', function (req, res, next) {
 router.post('/signup', function (req, res, next) {
     req.pool.getConnection(function (err, connection) {
         if (err) {
+            connection.release();
             res.sendStatus(500);
-            console.error(err);
             return;
         }
         const { firstName, lastName, email, password, phone, streetNumber, streetAddress, city, state, postalCode } = req.body;  // Extract user details from request body
@@ -65,11 +72,13 @@ router.post('/signup', function (req, res, next) {
         connection.query(query, [email], function (error, results) {
             if (error) {
                 console.error(error);  // Log error to console
+                connection.release();
                 res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
                 return;
             }
 
             if (results.length > 0) {
+                connection.release();
                 res.status(400).json({ message: "Email already exists" });  // Send 400 status if email already exists
                 return;
             }
@@ -79,8 +88,8 @@ router.post('/signup', function (req, res, next) {
             connection.query(insertAddressQuery, [streetAddress, streetNumber, city, state, postalCode], function (error, results) {
                 if (error) {
                     console.error(error);  // Log error to console
-                    res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
                     connection.release();
+                    res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
                     return;
                 }
 
@@ -90,11 +99,16 @@ router.post('/signup', function (req, res, next) {
                 // Insert new user into database
                 const insertQuery = 'INSERT INTO User (first_name, last_name, email_id, password, phone_number, address_id, user_type) VALUES (?, ?, ?, ?, ?, ?, ?)';
                 connection.query(insertQuery, [firstName, lastName, email, hashedPassword, phone, addressId, userType], function (error) {
+                    connection.release();
                     if (error) {
                         console.error(error);  // Log error to console
                         res.status(500).json({ message: "Internal server error" });  // Send 500 status if there's a server error
                         return;
                     }
+
+                    req.session.email = email;
+                    req.session.userType = 'participant';
+                    req.session.loggedIn = true;
 
                     res.json({ message: "Signup success" });  // Send success message if signup is successful
                 });
@@ -104,7 +118,7 @@ router.post('/signup', function (req, res, next) {
 });
 
 //Establishing the connection with the database
-router.get('/result', function (req, res) {
+/*router.get('/result', function (req, res) {
     //Connect to the database
     req.pool.getConnection(function (err, connection) {
         //General error handling
@@ -122,9 +136,100 @@ router.get('/result', function (req, res) {
                 res.sendStatus(500);
                 return;
             }
-            res.json(rows); //Send response
+            res.send(JSON.stringify(rows)); //Send response
         });
     });
+});
+*/
+
+router.get('/branches', (req, res) => {
+    req.pool.getConnection((err, connection) => {
+        if (err) {
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        const fetchBranchesQuery = 'SELECT Branch.branch_id AS id, CONCAT(Address.street, " ", Address.city) AS name FROM Branch INNER JOIN Address ON Branch.address_id = Address.address_id';
+
+        connection.query(fetchBranchesQuery, (error, results) => {
+            connection.release();
+            if (error) {
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            res.status(200).json({ branches: results });
+        });
+    });
+});
+
+router.get('/login-status', function (req, res) {
+    res.json( { loggedIn: req.session.loggedIn } );
+});
+
+router.get('/logout', function(req, res){
+    req.session.loggedIn = false;
+    res.json({ loggedIn: req.session.loggedIn});
+});
+
+router.get('/getPosts', function(req, res){
+    if (req.session.loggedIn !== true){
+        req.pool.getConnection((err, connection) => {
+            if (err) {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+
+            const query = 'SELECT event_id, title, description, timestamp, date, location, email_id, rsvp_bool_check as RSVP FROM Event WHERE branch_id = ? AND accessibility_status = "public";';
+
+            connection.query(query, [req.session.branch], function(error, results){
+                connection.release();
+                if (error) {
+                    res.status(500).json({ message: 'Server error!' });
+                }
+                res.status(200).json( {posts: results} );
+            });
+        });
+    }
+    else{
+        req.pool.getConnection((err, connection) => {
+            if (err) {
+                res.status(500).json({ message: 'Internal Server Error' });
+            }
+
+            const q = 'SELECT * FROM UserBranch WHERE user_id=? AND branch_id=?;';
+
+            connection.query(q, [req.session.email, req.session.branch], function(error, results){
+                if(error){
+                    connection.release();
+                    res.status(500).json({ message: 'Server error'});
+                }
+
+                var len = results.length;
+
+                if (len !== 0){
+                    const query = 'SELECT title, description, timestamp, date, location, email_id, rsvp_bool_check as RSVP FROM Event WHERE branch_id = ?;';
+
+                    connection.query(query, [req.session.branch], function(error, results){
+                        connection.release();
+                        if (error) {
+                            res.status(500).json({ message: 'Server error!' });
+                        }
+                        res.status(200).json( {posts: results} );
+                    });
+                }
+                else {
+                    const query = 'SELECT title, description, timestamp, date, location, email_id, rsvp_bool_check as RSVP FROM Event WHERE branch_id = ? AND accessibility_status = "public";';
+
+                    connection.query(query, [req.session.branch], function(error, results){
+                        if (error) {
+                            connection.release();
+                            res.status(500).json({ message: 'Server error!' });
+                        }
+                        res.status(200).json( {posts: results} );
+                    });
+                }
+            });
+
+        });
+    }
 });
 
 module.exports = router;

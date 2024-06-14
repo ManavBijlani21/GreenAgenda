@@ -37,10 +37,15 @@ const vueApp = new Vue({
         test: "",
         loadPosts: true,
         search: "",
-        loggedIn: false
+        loggedIn: false,
+        admin: {
+            branches: []
+        }
     },
     mounted() {
         this.checkLoginStatus();  // Call the method when the component is mounted
+        this.fetchBranches();
+        this.getPosts();
     },
     computed: {
         posts: function () {
@@ -54,20 +59,70 @@ const vueApp = new Vue({
         }
     },
     methods: {
+        getPosts(){
+            fetch('/accounts/getPosts')
+            .then(response => response.json())
+            .then(data => {
+                this.posts1 = data.posts;
+            })
+            .catch(error => {
+                alert("Error while fetching posts for this branch!");
+                console.error('Error: ', error);
+            });
+        },
+        logOut(){
+            fetch('/accounts/logout')
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn === false){
+                    alert("Logged out successfully!");
+                    window.location.href = '/';
+                }
+            })
+            .catch(error => {
+                alert('Log out failed!');
+                console.error('Error: ', error);
+            });
+        },
+        fetchBranches() {
+            fetch('/accounts/branches')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);
+                    } else {
+                        this.admin.branches = data.branches;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
         //this method just extists for testing purposes not related to first milestone submission
-        RSVP: function () {
-            console.log("Hello World!");
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function () {
-                vueApp.test = this.responseText;
-                console.log(vueApp.test);
-            };
-            xhttp.open("GET", this.baseURL + "/test", true); //first is the type of request in caps, then the url
-            xhttp.send();
+        RSVP: function (arg1) {
+            if (!this.loggedIn){
+                alert("Not signed in, redirecting now!");
+                window.location.href = '/login';
+            }
+            console.log(arg1)
+            fetch('/users/RSVP', {
+                method: "POST",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: JSON.stringify({event_id: arg1})
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error: ', error);
+            });
         },
         async checkLoginStatus() {  // Method to check user login status
             try {
-                const response = await fetch("/users/login-status");  // Send a request to the server to check login status
+                const response = await fetch("/accounts/login-status");  // Send a request to the server to check login status
                 const data = await response.json();  // Parse the JSON response
 
                 this.loggedIn = data.loggedIn;  // Update the loggedIn data property

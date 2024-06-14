@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 router.use(function (req, res, next) {
     // Check if user session exists
     console.log(req.session);
-    if (req.session && req.session.email && req.session.userType === 'manager') {
+    if (req.session.loggedIn === true && (req.session.userType === 'manager' || req.session.userType === 'admin')) {
         next();  // User is logged in, proceed to the next middleware or route handler
     } else {
         res.status(401).json({ message: "Unauthorized" });  // User is not logged in, send unauthorized response
