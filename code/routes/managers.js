@@ -71,7 +71,7 @@ const sendEmail = (managerEmail, user, eventName, eventDescription, eventDate) =
         secure: false,
         auth: {
             user: 'serenitysanctuary001@gmail.com',
-            pass: 'WDCProjectGrp21'
+            pass: 'xodb mvbl jxfh ixyb'
         }
     });
 
