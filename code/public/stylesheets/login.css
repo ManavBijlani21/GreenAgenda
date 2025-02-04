@@ -1,18 +1,29 @@
-.signup {
-    padding: 15vh 30vw 0vh 30vw;
+.Login {
+    padding: 15vh 30vw 3vh 30vw;
     justify-content: center;
+    background-image : url('../images/signup.jpg')
 }
 
 .center {
     text-align: center;
 }
 
-.signup *{
+.Login *{
     text-align: center;
+}
+
+.login-box{
+    width : 600px;
+    height : 450px;
+    border: 2px solid green;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
 }
 
 .title {
     font-size: 3vw;
+    color: #023E2D;
 }
 
 .redirect {
@@ -21,8 +32,8 @@
 }
 
 .redirlink {
-    color: #e91e63;
-    text-decoration: none;
+    color: #023E2D;
+    font-weight : bold;
 }
 
 div.center div {
@@ -42,7 +53,7 @@ div.center div input {
 }
 
 .password{
-    color: #e91e63;
+    color: #023E2D;
     float: left;
     padding-top: 5vh;
     padding-bottom: 2.5vh;
@@ -56,23 +67,4 @@ div.center div input {
     min-height: 3vh;
     font-size: 1.5vw;
     width: 20vw;
-}
-
-.orSign{
-    display: flex;
-    flex-direction: row;
-    width: 40vw;
-}
-
-.orSign hr{
-    width: 6vw;
-    height: 0.1vh;
-    border: none;
-    background-color: black;
-    transform: translate(0, 1.5vh);
-}
-
-.logo2 {
-    width: 4vw;
-    padding-top: 5vh;
 }

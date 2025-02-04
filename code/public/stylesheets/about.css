@@ -1,70 +1,109 @@
-#belief{
-    padding-top:10vh;
-    padding-bottom:8vh;
-    text-align:center;
-    font-size:34px;
-    color:white;
-    line-height:normal;
-    letter-spacing:normal;
-    background-color:rgb(190, 61, 104);
+.belief {
+    padding-top: 10vh;
+    padding-bottom: 8vh;
+    text-align: center;
+    line-height: 45px;
+    font-size: 34px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('../images/about_page_1.jpg');
+    background-size: cover;
+    height: 300px;
+    background-repeat: no-repeat;
     font-style: italic;
 }
 
-#join_us{
-    padding-top:8vh;
-    font-family:Arial,Helvetica,sans-serif;
-    text-align:center;
-    font-size:34px;
-    color:white;
-    line-height:normal;
-    background-color:#4fd611;
+.mission_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F5E1;
+}
+
+.mission_flex_item {
+    padding-top: 75px;
+    font-size: 18px;
+    color: #0A420A;
+    text-align: center;
+}
+
+#mission_text {
+    transform: translateX(80px);
+}
+
+.mission_flex_item h2 {
+    font-size: 40px;
+    text-decoration: bold;
+    text-align: center;
+}
+
+#mission_image {
+    padding: 0;
+    padding-top: 40px;
+    margin-right: 0px;
+    padding-left: 200px;
+}
+
+#mission_image img {
+    width: 750px;
+    height: 550px;
+}
+
+.vision_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #F7F5E1;
+}
+
+.vision_flex {
+    font-size: 18px;
+    color: #0A420A;
+    text-align: center;
+}
+
+#vision_text {
+    transform: translateX(-120px);
+}
+
+.vision_flex h2 {
+    font-size: 40px;
+    text-decoration: bold;
+    text-align: center;
+}
+
+#vision_image {
+    padding: 0;
+    margin-left: 0px;
+    padding-right: 270px;
+}
+
+#vision_image img {
+    width: 700px;
+    height: 550px;
+}
+
+.nurture_change {
+    padding-top: 8vh;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 34px;
+    color: white;
+    line-height: normal;
+    background-color: #0A420A;
     font-style: italic;
-    padding-bottom:8vh;
+    padding-bottom: 8vh;
 
 }
 
-#join_us button{
-    background-color:white;
-    color:black;
-    font-size:20px;
-
+.nurture_change button {
+    background-color: white;
+    color: #0A420A;
+    margin-top: 15px;
+    font-size: 20px;
 }
 
-#join_us button:hover{
-    background-color:rgba(30, 19, 158, 0.834);
-    color : white;
-
-}
-
-
-.mission_text{
-    text-align:center;
-    width:40em;
-    height:30.88em;
-    font-size:larger;
-    padding:15vh;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.vision_text{
-    text-align:center;
-    width:40em;
-    height:30.88em;
-    font-size:larger;
-    padding:15vh;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-.vision_image{
-    width:50vw;
-    height:50vh;
-    padding-left:3vh;
-
-
-}
-
-.mission_image{
-    width:44vw;
-    height:50vh;
-    padding-right:2vh;
+.nurture_change button:hover {
+    background-color: #F7F5E1;
+    color: #0A420A;
 }

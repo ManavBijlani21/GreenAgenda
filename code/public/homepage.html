@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Serenity Sanctuary</title>
+    <title>GreenAgenda</title>
 
     <link rel="stylesheet" href="stylesheets/default.css">
     <link rel="stylesheet" href="stylesheets/homepage.css">
@@ -20,38 +20,51 @@
         <header>
             <a href="/">
                 <div class="logo">
-                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    <img src="images/Logo.jpg" alt="Green Agenda Logo">
+                    <p style = "color:white">GreenAgenda</p>
                 </div>
             </a>
             <nav>
                 <ul>
                     <li><a href="/about">About</a></li>
                     <li><a href="/support">Support Us</a></li>
-                    <li class="dropdown">
-                        <a href="/branch">Branches</a>
-                        <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/joinBranch">Join a Branch</a></li>
+                    <li><a href = "/community">Community</a></li>
+                    <li><a href="/signup">Join Us</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a v-if="loggedIn" href="/settings" class="login">Settings</a>
-                <a v-if="loggedIn" v-on:click="logOut" class="donate">Log Out</a>
-                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
-                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
+                <a href="/signup" class="signup">Sign Up</a>
+                <a href="/login" class="login">Login</a>
             </div>
         </header>
 
-        <!-- Hero section -->
-        <section class="hero">
-            <img src="https://static.wixstatic.com/media/11062b_cacb6249b6024b61b2d8a8594b7dbb4c~mv2.jpg/v1/fill/w_1920,h_1088,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/11062b_cacb6249b6024b61b2d8a8594b7dbb4c~mv2.jpg"
-                alt="Hands holding grains">
-            <div class="hero-text">
-                <h1>Welcome to Serenity Sanctuary</h1>
+
+
+        <div class = "row">
+            <div class = "left_text">
+                <h1>GreenAgenda:</h1>
+                <h1>Together for a</h1>
+                <h1>sustainable</h1>
+                <h1>tomorow</h1>
+                <br>
+                <br>
+
+                <p>A community initiative driving sustainability</p>
+                <p>through afforestation and environmental</p>
+                <p>conservation. Join us in creating a cleaner,</p>
+                <p>greener world.</p>
+                <br>
+                <button type = "button" onclick="window.location.href='/signup'">Join Us</button>
             </div>
-        </section>
+
+            <div class = "right_images">
+                    <img style = "width : 427px; height : 283px; padding-top : 50px;" src="images/homepage-1.jpg" alt="Nature">
+                    <img  style = "width : 215; height : 144px;" src="images/homepage-2.jpeg" alt="Community">
+                    <img  style = "width : 215; height : 144px;" src="images/homepage-3.jpg" alt="Media">
+                    <img  style = "width : 215; height : 144px;" src="images/homepage-4.jpeg" alt="Recycle">
+                    <img  style = "width : 215; height : 144px;" src="images/homepage-5.jpg" alt="Beach">
+            </div>
+        </div>
 
         <!-- Actions section with links -->
         <section class="actions">
@@ -74,24 +87,16 @@
             <h2>Currently Open Donations</h2>
             <div class="donation-grid">
                 <div class="donation">
-                    <img style = "width : 100%; height : 100%" src="images/homepage-2.jpg"
-                        alt="Donate for Yaxa">
-                    <button type="button">Donate now</button>
+                    <img src="images/donations-1.png" alt="Grow Trees">
                 </div>
                 <div class="donation">
-                    <img style = "width : 100%; height : 100%" src="images/homepage-3.jpg"
-                        alt="Feed a Child">
-                    <button type="button">Donate now</button>
+                    <img src="images/donations-2.png" alt="Wildlife">
                 </div>
                 <div class="donation">
-                    <img style = "width : 100%; height : 100%" src="images/homepage-4.jpg"
-                        alt="Help the Homeless">
-                    <button type="button">Donate now</button>
+                    <img src="images/donations-3.png" alt="Energy">
                 </div>
                 <div class="donation">
-                    <img style = "width : 100%; height : 100%" src="images/homepage-5.jpg"
-                        alt="Blood Donations">
-                    <button type="button">Donate now</button>
+                    <img src="images/donations-4.png" alt="Beach">
                 </div>
             </div>
         </section>
@@ -102,73 +107,67 @@
             <div class="event-grid">
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-6.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-1.png"
                             alt="Event 1">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Community Tree Planting Day</h3>
+                            <p>Saturday, 15 March 2025</p>
+                            <p class="event-description"> Royal Botanic Gardens, Melbourne, Victoria</p>
                         </div>
                     </div>
                 </div>
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-7.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-2.jpg"
                             alt="Event 2">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Sustainable Living Workshop</h3>
+                            <p>Saturday, 26 April 2025</p>
+                            <p class="event-description"> Community Hall, Brisbane, Queensland</p>
                         </div>
                     </div>
                 </div>
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-8.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-3.jpg"
                             alt="Event 3">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Beach Clean-Up Event</h3>
+                            <p>Sunday, 25 May 2025</p>
+                            <p class="event-description">Bondi Beach, Sydney, New South Wales</p>
                         </div>
                     </div>
                 </div>
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-9.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-4.jpg"
                             alt="Event 4">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Wildlife Habitat Restoration Day</h3>
+                            <p>Saturday, 21 June 2025</p>
+                            <p class="event-description">Central Park, Adelaide, South Australia</p>
                         </div>
                     </div>
                 </div>
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-10.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-5.png"
                             alt="Event 5">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Eco-Fair and Festival</h3>
+                            <p>Saturday, 19 July 2025</p>
+                            <p class="event-description">Federation Square, Melbourne, Victoria</p>
                         </div>
                     </div>
                 </div>
                 <div class="event">
                     <div class="event-image">
-                        <img style = "width : 40vh; height : 20vh" src="images/homepage-11.jpg"
+                        <img style = "width : 40vh; height : 20vh" src="images/events-6.jpg"
                             alt="Event 6">
                         <div class="event-details">
-                            <h3>Event Name</h3>
-                            <p>Date | Venue</p>
-                            <p class="event-description">Detailed event description goes here...</p>
-                            <button type="button">RSVP</button>
+                            <h3>Community Garden Build Day</h3>
+                            <p>Saturday, 23 August 2025</p>
+                            <p class="event-description">Community Park, Perth, Western Australia</p>
                         </div>
                     </div>
                 </div>
@@ -178,17 +177,17 @@
         <!-- Footer section -->
         <footer>
             <div class="join">
-                <h2>Join Serenity Sanctuary</h2>
-                <p>Support Our Cause</p>
-                <button type="button">Sign Up</button>
+                <h2>Join GreenAgenda</h2>
+                <p>Support Our Mission</p>
+                <button style = "margin-top : 10px" type="button" onclick= "window.location.href='/signup';">Sign Up</button>
             </div>
             <div class="footer-content">
                 <div class="contact-info">
-                    <h3>Serenity Sanctuary</h3>
+                    <h3>GreenAgenda</h3>
                     <p>Become a part of this wonderful community</p>
-                    <p>Email: info@mysite.com</p>
+                    <p>Email: info@site.com</p>
                     <p>Phone: 123-456-7890</p>
-                    <p>Registered Charity: 12345-67</p>
+                    <p>Registered Contact: 12345-67</p>
                 </div>
                 <div class="newsletter">
                     <h3>Get Monthly Updates</h3>
@@ -200,8 +199,8 @@
                     <ul>
                         <li><a href="/about">About</a></li>
                         <li><a href="/support">Support Us</a></li>
-                        <li><a href="/branch">Branches</a></li>
-                        <li><a href="/joinBranch">Join a Branch</a></li>
+                        <li><a href="/community">Community</a></li>
+                        <li><a href="/signup">Get Started</a></li>
                     </ul>
                 </div>
             </div>

@@ -10,9 +10,7 @@ var mysql = require('mysql');
 var indexRouter = require('./routes/index');
 var accountsRouter = require('./routes/accounts');
 var usersRouter = require('./routes/users');
-var managersRouter = require('./routes/managers');
-var adminsRouter = require('./routes/admins');
-var branchesRouter = require('./routes/branches');  // Import the branches router
+var communityRouter = require('./routes/community');  // Import the branches router
 
 //Create a pool (group) of connections to be used for connecting with SQL server
 var dbConnectionPool = mysql.createPool({
@@ -46,8 +44,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/accounts', accountsRouter);
 app.use('/users', usersRouter);
-app.use('/managers', managersRouter);
-app.use('/admins', adminsRouter);
-app.use('/branches', branchesRouter);
+app.use('/community', communityRouter);
 
 module.exports = app;

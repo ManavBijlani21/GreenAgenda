@@ -24,13 +24,9 @@ router.get('/support', function(req, res, next){
   res.sendFile(path.join(__dirname, '../public/support.html'));
 });
 
-router.get('/branch', function (req, res, next) {
+router.get('/community', function (req, res, next) {
   req.session.branch = req.query.branch;
-  res.sendFile(path.join(__dirname, '../public/branch.html'));
-});
-
-router.get('/joinBranch', function (req, res, next) {
-  res.sendFile(path.join(__dirname, '../public/joinBranch.html'));
+  res.sendFile(path.join(__dirname, '../public/community.html'));
 });
 
 router.get('/login', function(req, res, next){
@@ -39,10 +35,6 @@ router.get('/login', function(req, res, next){
 
 router.get('/signup', function(req, res, send){
   res.sendFile(path.join(__dirname, '../public/signup.html'));
-});
-
-router.get('/settings', function (req, res, next) {
-  res.sendFile(path.join(__dirname, '../public/settings.html'));
 });
 
 module.exports = router;

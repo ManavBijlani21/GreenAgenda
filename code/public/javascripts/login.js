@@ -3,14 +3,10 @@ const vueApp = new Vue({
     data : {
         email : "",
         password : "",
-        admin: {
-            branches: []
-        },
         loggedIn: false
     },
     mounted() {
-        this.checkLoginStatus();  // Call the method when the component is mounted
-        this.fetchBranches();
+        this.checkLoginStatus();
     },
     computed : {
     },
@@ -28,20 +24,6 @@ const vueApp = new Vue({
                 alert('Log out failed!');
                 console.error('Error: ', error);
             });
-        },
-        fetchBranches() {
-            fetch('/accounts/branches')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        alert(data.message);
-                    } else {
-                        this.admin.branches = data.branches;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
         },
         async login() {  // Method to handle user login
             try {

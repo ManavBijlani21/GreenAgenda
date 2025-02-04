@@ -11,7 +11,7 @@ body {
 }
 
 button {
-    background-color: #e91e63;
+    background-color: #067052;
     color: white;
     border: none;
     padding: 1vh;
@@ -22,10 +22,11 @@ button {
 
 header {
     display: flex;
+    font-size: 18px;
     justify-content: space-between;
     align-items: center;
     padding: 2vw;
-    background-color: #333;
+    background-color: #023E2D;
     color: white;
     position: fixed;
     top: 0;
@@ -34,7 +35,14 @@ header {
     z-index: 1000;
 }
 
+.logo {
+    display : flex;
+    align-items : center;
+    justify-content : space-between;
+}
+
 header a .logo img {
+    margin-right : 10px;
     height: 5vh;
 }
 
@@ -72,13 +80,13 @@ header .auth-buttons .login:hover {
     color: black;
 }
 
-header .auth-buttons .donate {
-    background-color: #e91e63;
+header .auth-buttons .signup {
+    background-color: #067052;
     border: none;
 }
 
-header .auth-buttons .donate:hover {
-    color: #e91e63;
+header .auth-buttons .signup:hover {
+    color: #067052;
     background-color: white;
     border: none;
 }
@@ -87,36 +95,8 @@ header nav ul li {
     position: relative;
 }
 
-header nav ul li .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    min-width: 16vw;
-    box-shadow: 0px 0.8vh 1.6vw rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-header nav ul li .dropdown-content li {
-    display: block;
-}
-
-header nav ul li .dropdown-content li a {
-    color: white;
-    padding: 1.2vh 1.6vw;
-    text-decoration: none;
-    display: block;
-}
-
-header nav ul li .dropdown-content li a:hover {
-    background-color: #575757;
-}
-
-header nav ul li:hover .dropdown-content {
-    display: block;
-}
-
 footer {
-    background-color: #e91e63;
+    background-color: #023E2D;
     color: white;
     padding: 2vh;
 }

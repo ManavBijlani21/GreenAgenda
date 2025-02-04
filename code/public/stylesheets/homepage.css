@@ -1,14 +1,51 @@
-/* Styling for the hero section */
-.hero {
-    position: relative;
-    text-align: center;
+
+.row{
+    display:flex;
     color: white;
+    flex-wrap : wrap;
+    background-color : #023E2D;
+    justify-content : center;
+    align-items : center;
 }
 
-.hero img {
-    width: 100%;
-    height: auto;
+.left_text{
+    flex: 60%;
+    padding : 100px;
+    padding-top : 90px;
+    padding-left:325px;
 }
+
+.left_text h1{
+    font-size : 52px;
+    line-height: 120%;
+}
+
+.left_text p{
+    font-size : 18px;
+}
+
+
+.right_images{
+    flex: 40%;
+}
+
+.right_images img {
+    width: auto;
+    height: auto; /* Maintains aspect ratio */
+    margin: 10px; /* Adds spacing between images */
+    padding : 0;
+}
+
+.left_text button{
+    font-size : 20px;
+    margin-left : 105px;
+}
+
+.left_text button:hover{
+    background-color : white;
+    color : #023E2D;
+}
+
 
 .hero .hero-text {
     position: absolute;
@@ -24,20 +61,23 @@
 .donations,
 .events {
     padding: 2vh;
+    background-color : #F7F5E1;
 }
 
 .donations h2,
 .events h2 {
+    font-size:52px;
     text-align: center;
     margin-bottom: 2vh;
+    text-decoration: underline;
 }
 
 /* Grid layout for donations section */
 .donation-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2vh;
-    max-width: 70vw;
+    gap: 3vh;
+    max-width: 55vw;
     margin: 0 auto;
 }
 
@@ -54,18 +94,19 @@
 .donation,
 .event {
     text-align: center;
-    background-color: #f0f0f0;
-    padding: 1vh;
-    border-radius: 0.5vh;
-    overflow : hidden;
+    background-color: #067052;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .donation img,
 .event img {
-    width: 100%;
-    height: 100%;
+    width: 358px;
+    height: 289px;
     object-fit : cover;
     display : block;
+    margin : 5px;
 }
 
 /* Styling for event image container */
@@ -119,22 +160,13 @@
     margin: 1vh;
     text-decoration: none;
     color: white;
-    background-color: #e91e63;
+    background-color: #0A420A;
     border-radius: 0.5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Background color for the second and third action items */
-.actions .action:nth-child(2) {
-    background-color: #4caf50;
-}
-
-.actions .action:nth-child(3) {
-    background-color: #000;
 }
 
 .actions .action h2,
@@ -147,13 +179,13 @@
 
 /* Hover effects for action items */
 .actions .action:hover {
-    background-color: #d81b60;
+    background-color: #0c8312;
 }
 
 .actions .action:nth-child(2):hover {
-    background-color: #388e3c;
+    background-color: #0c8312;
 }
 
 .actions .action:nth-child(3):hover {
-    background-color: #333;
+    background-color: #0c8312;
 }

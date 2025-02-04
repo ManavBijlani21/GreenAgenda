@@ -11,41 +11,39 @@
     <link rel="stylesheet" href="stylesheets/support.css">
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/b6825ebcec.js" crossorigin="anonymous"></script>
     <script src="javascripts/support.js" defer></script>
 </head>
 
 <body>
     <div id="app">
+        <!-- Header section -->
         <header>
             <a href="/">
                 <div class="logo">
-                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    <img src="images/Logo.jpg" alt="Green Agenda Logo">
+                    <p style = "color:white">GreenAgenda</p>
                 </div>
             </a>
             <nav>
                 <ul>
                     <li><a href="/about">About</a></li>
                     <li><a href="/support">Support Us</a></li>
-                    <li class="dropdown">
-                        <a href="/branch">Branches</a>
-                        <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/joinBranch">Join a Branch</a></li>
+                    <li><a href = "/community">Community</a></li>
+                    <li><a href="/signup">Join Us</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a v-if="loggedIn" href="/settings" class="login">Settings</a>
-                <a v-if="loggedIn" v-on:click="logOut" class="donate">Log Out</a>
-                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
-                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
+                <a href="/signup" class="signup">Sign Up</a>
+                <a href="/login" class="login">Login</a>
             </div>
         </header>
 
+        <br>
+
         <div id="get_involved" style="font-family:Arial, Helvetica, sans-serif">
             <h1>Get Involved with</h1>
-            <h1>Serenity Sanctuary</h1>
+            <h1>GreenAgenda</h1>
         </div>
 
         <div class="membership">
@@ -56,15 +54,14 @@
             <p>support our various branches and their events. Be a part of positive change and </p>
             <p>help us make a meaningful impact in the community.</p>
             <br>
-            <div id="join_now"><a href="/joinBranch.html">Join Now</a></div>
+            <div id="join_now" onclick= "window.location.href='/signup';"><a href="/joinBranch.html">Join Now</a></div>
 
         </div>
 
-        <img src="images/support_page_1.jpg" alt="Team Image" class="image_class">
+        <img src="images/support-2.jpg" alt="Team Image" class="image_class">
 
         <div class="ways_of_support">
             <h2>Ways to Support</h2>
-            <br>
             <p>Become a member </p>
             <br>
 
@@ -72,37 +69,33 @@
 
         <table>
 
-            <tr>
-
+            <tr class = "contact_section">
                 <td class="local">
+                    <i class="fa-regular fa-user"></i>
                     <h2>Attend Local Events</h2>
-
                     <p>Visit our branches across different </p>
                     <p>locations and take part in our impactful </p>
                     <p>events and community initiatives.</p>
                 </td>
 
                 <td class="online">
+                    <i class="fa-solid fa-globe"></i>
                     <h2>Online Donations</h2>
-
-                    <p>Make a tax-deductible contribution towards our </p>
-                    <p>causes and support our ongoing projects.</p>
+                    <p>
+                    Make a tax-deductible contribution towards<br>
+                    causes and support our ongoing projects.
+                    </p>
                     <br>
-                    <div id="donation_done"><button type="button">Donate Now</button></div>
                 </td>
 
                 <td class="connect">
+                    <i class="fa-solid fa-phone"></i>
                     <h2>Connect with Us</h2>
 
                     <p>You can also connect with us to learn more </p>
                     <p>about our work and find out how you can </p>
                     <p>contribute offline. Call us at 123-456-7890.</p>
                 </td>
-
-
-
-
-
             </tr>
 
 
@@ -111,17 +104,17 @@
         <!-- Footer section -->
         <footer>
             <div class="join">
-                <h2>Join Serenity Sanctuary</h2>
-                <p>Support Our Cause</p>
-                <button type="button">Sign Up</button>
+                <h2>Join GreenAgenda</h2>
+                <p>Support Our Mission</p>
+                <button style = "margin-top : 10px" type="button" onclick= "window.location.href='/signup';">Sign Up</button>
             </div>
             <div class="footer-content">
                 <div class="contact-info">
-                    <h3>Serenity Sanctuary</h3>
-                    <p>Become a part of this wonderful community!</p>
-                    <p>Email: info@mysite.com</p>
+                    <h3>GreenAgenda</h3>
+                    <p>Become a part of this wonderful community</p>
+                    <p>Email: info@site.com</p>
                     <p>Phone: 123-456-7890</p>
-                    <p>Registered Charity: 12345-67</p>
+                    <p>Registered Contact: 12345-67</p>
                 </div>
                 <div class="newsletter">
                     <h3>Get Monthly Updates</h3>
@@ -133,8 +126,8 @@
                     <ul>
                         <li><a href="/about">About</a></li>
                         <li><a href="/support">Support Us</a></li>
-                        <li><a href="/branch">Branches</a></li>
-                        <li><a href="/joinBranch">Join a Branch</a></li>
+                        <li><a href="/community">Community</a></li>
+                        <li><a href="/signup">Get Started</a></li>
                     </ul>
                 </div>
             </div>

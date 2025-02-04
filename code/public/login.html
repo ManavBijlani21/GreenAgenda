@@ -21,38 +21,34 @@
 
 <body>
     <div id="app">
+        <!-- Header section -->
         <header>
             <a href="/">
                 <div class="logo">
-                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    <img src="images/Logo.jpg" alt="Green Agenda Logo">
+                    <p style = "color:white">GreenAgenda</p>
                 </div>
             </a>
             <nav>
                 <ul>
                     <li><a href="/about">About</a></li>
                     <li><a href="/support">Support Us</a></li>
-                    <li class="dropdown">
-                        <a href="/branch">Branches</a>
-                        <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/joinBranch">Join a Branch</a></li>
+                    <li><a href = "/community">Community</a></li>
+                    <li><a href="/signup">Join Us</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a v-if="loggedIn" href="/settings" class="login">Settings</a>
-                <a v-if="loggedIn" v-on:click="logOut" class="donate">Log Out</a>
-                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
-                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
+                <a href="/signup" class="signup">Sign Up</a>
+                <a href="/login" class="login">Login</a>
             </div>
         </header>
 
-        <section style="padding-top: 6.5vh;">
+        <section style="padding-top: 4vh;">
 
         </section>
 
-        <section class="signup">
+        <section class="Login">
+            <div class = "login-box">
             <div class="center">
                 <h1 class="title">Log In</h1>
                 <sub class="redirect">New to this site? <a class="redirlink" href="/signup">Sign Up</a></sub>
@@ -61,16 +57,13 @@
                     <input type="text" v-model="email">
                     <p>Password</p>
                     <input type="password" v-model="password">
-                    <a href="#" class="password">Forgot Password?</a>
                 </div>
+                <br>
+                <br>
                 <div class="specialWrapper">
                     <button class="special" type="button" @click="login">Log In</button>
                 </div>
-                <div class="orSign">
-                    <hr><sub>or log in with</sub>
-                    <hr>
-                </div>
-                <hr>
+            </div>
             </div>
         </section>
 
@@ -99,7 +92,7 @@
                     <ul>
                         <li><a href="/about">About</a></li>
                         <li><a href="/support">Support Us</a></li>
-                        <li><a href="/branch">Branches</a></li>
+                        <li><a href="/community">Community</a></li>
                         <li><a href="/joinBranch">Join a Branch</a></li>
                     </ul>
                 </div>

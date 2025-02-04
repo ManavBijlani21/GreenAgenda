@@ -18,14 +18,6 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
-router.get('/user-type', function (req, res) {
-    if (req.session && req.session.userType) {
-        res.json({ userType: req.session.userType });
-    } else {
-        res.status(401).json({ message: "Unauthorized" });
-    }
-});
-
 // Route to get user information
 router.get('/user-info', (req, res) => {
     if (!req.session.email) {
@@ -166,24 +158,5 @@ router.post('/update-user', (req, res) => {
         });
     });
 });
-
-router.post('/RSVP', function(req, res){
-    res.status(500).json({ message: 'Under construction, coming soon!'});
-
-    
-    req.pool.getConnection((err, connection) => {
-        if(err){
-            console.log(err);
-            res.status(500).json({ message: "Server error, try again later."});
-        }
-
-        const query = 'INSERT INTO ';
-
-        connection.query(query, [], function(error, results){
-
-        });
-    });
-});
-
 
 module.exports = router;

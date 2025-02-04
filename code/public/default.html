@@ -13,6 +13,7 @@
         -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="javascripts/default.js" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!--put the specific script for your page above by renaming the path away from default.js
 
         -->
@@ -20,30 +21,25 @@
 
 <body>
     <div id="app">
+        <!-- Header section -->
         <header>
             <a href="/">
                 <div class="logo">
-                    <img src="images/homepage-1.png" alt="Serenity Sanctuary Logo">
+                    <img src="images/Logo.jpg" alt="Green Agenda Logo">
+                    <p style = "color:white">GreenAgenda</p>
                 </div>
             </a>
             <nav>
                 <ul>
                     <li><a href="/about">About</a></li>
                     <li><a href="/support">Support Us</a></li>
-                    <li class="dropdown">
-                        <a href="/branch">Branches</a>
-                        <ul class="dropdown-content">
-                            <li v-for="branch in admin.branches"><a :href="'/branch?branch=' + branch.id .toString()"> {{ branch.name }} </a></li>
-                        </ul>
-                    </li>
-                    <li><a href="/joinBranch">Join a Branch</a></li>
+                    <li><a href = "/community">Community</a></li>
+                    <li><a href="/signup">Join Us</a></li>
                 </ul>
             </nav>
             <div class="auth-buttons">
-                <a v-if="loggedIn" href="/settings" class="login">Settings</a>
-                <a v-if="loggedIn" v-on:click="logOut" class="donate">Log Out</a>
-                <a v-if="!loggedIn" href="/login" class="login">Log In</a>
-                <a v-if="!loggedIn" href="/signup" class="donate">Sign Up</a>
+                <a href="/signup" class="signup">Sign Up</a>
+                <a href="/login" class="login">Login</a>
             </div>
         </header>
 
@@ -83,13 +79,14 @@
                     <ul>
                         <li><a href="/about">About</a></li>
                         <li><a href="/support">Support Us</a></li>
-                        <li><a href="/branch">Branches</a></li>
+                        <li><a href="/community">Community</a></li>
                         <li><a href="/joinBranch">Join a Branch</a></li>
                     </ul>
                 </div>
             </div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -1,19 +1,24 @@
 #get_involved{
     padding-top:10vh;
-    padding-bottom:8vh;
+    padding-bottom:10vh;
     text-align:center;
     font-size:34px;
     color:white;
     line-height:normal;
     letter-spacing:normal;
-    background-color:rgb(47, 194, 47);
+    background-image: url('../images/support-1.jpeg'); /* Adds the background image */
+    background-repeat: repeat;
+    background-size: cover; /* Ensures the image covers the entire div */
     font-style: bold;
 }
 
 .membership{
+    font-family:Arial, Helvetica, sans-serif;
+    color : #023E2D;
+    background-color : #F7F5E1;
     padding-left : 10vh;
     padding-right: 10vh;
-    padding-top: 10vh;
+    padding-top: 5vh;
     padding-bottom:5vh;
     text-align:center;
 }
@@ -21,11 +26,10 @@
 .membership h2{
     font-size:50px;
     line-height:1.2;
-
 }
 
 #join_now a{
-    background-color:rgb(198, 53, 77);
+    background-color:#023E2D;
     color:white;
     font-size:20px;
     padding: 1vh 1vw 1vh 1vw;
@@ -34,46 +38,69 @@
 }
 
 #join_now a:hover{
-    background-color:rgb(148, 45, 62);
+    background-color:#0A420A;
     color : white;
-
+    border:3px;
+    border-color: #023E2D;
 }
 
 .image_class{
-    height:60vh;
+    height:70vh;
     width:100%;
 }
 
 .ways_of_support{
+    color : #023E2D;
+    font-size : 18px;
     padding-left : 10vh;
     padding-right: 10vh;
     padding-top: 10vh;
     padding-bottom:5vh;
     text-align:center;
+    background-color : #F7F5E1;
 }
 
 .ways_of_support h2{
-    font-size:50px;
+    padding-bottom : 10px;
+    font-size:40px;
     line-height:1;
-
 }
 
 .local{
+    font-family :Arial, Helvetica, sans-serif;
     padding:10vh;
-    background-color:maroon;
+    background-color:#014039;
     color:white;
 }
 
 .online{
+    font-family :Arial, Helvetica, sans-serif;
     padding:10vh;
-    background-color:rgb(26, 202, 26);
-    color:white;
+    background-color:#F7F5E1;
+    color:#014039;
 }
 
 .connect{
+    font-family :Arial, Helvetica, sans-serif;
     padding:10vh;
-    background-color:black;
+    background-color:#023E2D;
     color:white;
+}
+
+.contact_section h2{
+    font-size: 28px;
+    padding-bottom : 10px;
+    text-align : center;
+}
+
+.contact_section p{
+    font-size : 15px;
+    padding-left : 30px;
+}
+
+.contact_section i{
+    font-size : 40px;
+    padding : 0 0 20px 140px;
 }
 
 #donation_done button{

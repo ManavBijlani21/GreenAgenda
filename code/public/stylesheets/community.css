@@ -1,0 +1,49 @@
+
+
+section.content {
+    width : 50%;
+    padding-top: 5vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding-bottom: 5vh;
+    margin-left : 350px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: 5px solid #023E2D;
+}
+
+.pageTop{
+    width : 75%;
+    height : auto;
+    padding : 10px 30px 15px 400px;
+}
+
+.pagination .page-link{
+  background-color : #F7F5E1;
+  border : 3px solid #023E2D;
+  font-size : larger;
+  color : #023E2D;
+}
+
+.content{
+    background-color : #F7F5E1;
+}
+.feedback{
+    font-size: 40px;
+    text-align: center;
+    color : #F7F5E1;
+}
+
+.pageTop .card.shadow{
+    border: solid 2px #023E2D;
+    border-radius: 20px;
+    color: #023E2D;
+    background-color : #F7F5E1;
+    margin-bottom : 30px;
+}
+
+
+
+
+
+
+
