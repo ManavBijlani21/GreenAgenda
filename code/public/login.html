@@ -70,17 +70,17 @@
         <!-- Footer section -->
         <footer>
             <div class="join">
-                <h2>Join Serenity Sanctuary</h2>
-                <p>Support Our Cause</p>
-                <button type="button">Sign Up</button>
+                <h2>Join GreenAgenda</h2>
+                <p>Support Our Mission</p>
+                <button style = "margin-top : 10px" type="button" onclick= "window.location.href='/signup';">Sign Up</button>
             </div>
             <div class="footer-content">
                 <div class="contact-info">
-                    <h3>Serenity Sanctuary</h3>
-                    <p>Become a part of this wonderful community!</p>
-                    <p>Email: info@mysite.com</p>
+                    <h3>GreenAgenda</h3>
+                    <p>Become a part of this wonderful community</p>
+                    <p>Email: info@site.com</p>
                     <p>Phone: 123-456-7890</p>
-                    <p>Registered Charity: 12345-67</p>
+                    <p>Registered Contact: 12345-67</p>
                 </div>
                 <div class="newsletter">
                     <h3>Get Monthly Updates</h3>
@@ -93,12 +93,53 @@
                         <li><a href="/about">About</a></li>
                         <li><a href="/support">Support Us</a></li>
                         <li><a href="/community">Community</a></li>
-                        <li><a href="/joinBranch">Join a Branch</a></li>
+                        <li><a href="/signup">Get Started</a></li>
                     </ul>
                 </div>
             </div>
         </footer>
     </div>
+
+    <div class="webchat" style="height: 600px; width: 350px; position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <iframe
+          title="Botpress Webchat"
+          style="height: 100%; width: 100%; border: none;"
+          srcdoc='
+          <!doctype html>
+          <html lang="en">
+            <head></head>
+            <body>
+              <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+              <script defer>
+                window.botpress.on("webchat:ready", (conversationId) => {
+                  botpress.open();
+                });
+                window.botpress.init({
+                    "botId": "4c556e13-c989-4a00-ac4f-09847609d8c4",
+                    "configuration": {
+                      "composerPlaceholder": "Start your eco-journey—ask me anything!",
+                      "botName": "GreenBot",
+                      "botDescription": "GreenBot educates users about GreenAgenda’s mission, events, feedback, and facilities—keeping you informed and engaged for a greener future!",
+                      "website": {},
+                      "email": {},
+                      "phone": {},
+                      "termsOfService": {},
+                      "privacyPolicy": {},
+                      "color": "#2a9561",
+                      "variant": "solid",
+                      "themeMode": "light",
+                      "fontFamily": "inter",
+                      "radius": 3.5,
+                      "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/02/07/16/20250207161553-BDTVIKSE.css"
+                    },
+                    "clientId": "d20798dd-cb2d-430c-9c8b-bba4e026d2c2"
+                  });
+              </script>
+            </body>
+          </html>'
+        ></iframe>
+      </div>
+
 </body>
 
 </html>
