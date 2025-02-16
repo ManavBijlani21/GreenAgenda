@@ -23,5 +23,5 @@ ctrl+c (stop the npm server running, has to be in the terminal the server was st
 
 service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
 
-![alt text](image.png)
-![Demo](download.gif)
+![alt text](/code/public/images/Logo.jpg)
+![Demo](/code/public/images/download.gif)
