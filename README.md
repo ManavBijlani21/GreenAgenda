@@ -1,3 +1,16 @@
+# GreenAgenda
+![alt text](/code/public/images/Logo.jpg)
+GreenAgenda is a community initiative across Australia that regularly organizes social events for individuals passionate about sustainability, afforestation and environmental conservation. We host activities focused on tree planting, maintaining clean spaces and raising awareness about ecological issues. Our mission is to foster a healthier planet for both present and future generations.
+
+# Table of Contents
+- [Key Features](#key-features)
+- [Technologies Used](#technologies-used)
+- [Project Setup](#setup-and-deployment)
+- [Backend Integration](#backend-integration)
+- [Frontend Deployment](#frontend-deployment)
+- [Team](#team)
+
+
 # Run Instructions, run in /code directory
 navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
 
