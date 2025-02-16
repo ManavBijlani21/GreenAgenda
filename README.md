@@ -22,3 +22,5 @@ npm start (not server and DB running, next commands are to stop db and server)
 ctrl+c (stop the npm server running, has to be in the terminal the server was started in)
 
 service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
+
+![alt text](image.png)
