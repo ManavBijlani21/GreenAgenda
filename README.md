@@ -103,4 +103,37 @@ service mysql stop (stops the databse running, should save a most recent copy of
     ```bash
     service mysql start
 
+3. Enter the MySQL CLI:
+    ```bash
+    mysql
+
+4. Create the database within MySQL:
+    ```bash
+    CREATE DATABASE Website_Database;
+
+5. Exit the MySQL CLI:
+    ```bash
+    exit
+
+6. Import the database dump:
+    ```bash
+    mysql < database_backup.sql
+    mysqldump --databases Website_Database > database_backup.sql
+
+7. Install missing packages and start the server
+    ```bash
+    npm install
+    npm start
+
+8. To stop the server and database
+    • Press Ctrl + C in the terminal to stop the npm server.
+    • Stop MySQL service
+        ```bash
+        service mysql stop
+
+## Team
+• **Manav Bijlani**
+• **Faisal Umar**
+• **Jack Rowlands**
+• **Sharzil Hasnine**
 
