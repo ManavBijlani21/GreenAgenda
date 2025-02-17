@@ -3,7 +3,7 @@
 #
 GreenAgenda is a community initiative across Australia that regularly organizes social events for individuals passionate about sustainability, afforestation and environmental conservation. We host activities focused on tree planting, maintaining clean spaces and raising awareness about ecological issues. Our mission is to foster a healthier planet for both present and future generations.
 
-# Table of Contents
+## Table of Contents
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
 - [Project Setup](#setup-and-deployment)
@@ -11,7 +11,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 - [Frontend Deployment](#frontend-deployment)
 - [Team](#team)
 
-# Key Features
+## Key Features
 • **Overview of GreenAgenda** – Provides users with an overview of the mission behind GreenAgenda, featuring an intuitive and visually appealing UI with a green theme.
 
 • **Open Donations** – Informs users about active donation opportunities, allowing them to contribute to the organization.
@@ -24,12 +24,19 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 • **Join the Community** – Enables users to register an account, participate in discussions, and contribute feedback.
 
+## Screenshots
+
+### Sign Up / Login Page
+<p align="center">
+  <img src="/code/public/images/sign-up-readme.jpg" width="45%">
+  <img src="/code/public/images/login-readme.jpg" width="45%">
+</p>
 
 
 
 
 
-# Run Instructions, run in /code directory
+## Run Instructions, run in /code directory
 navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
 
 service mysql start
@@ -56,3 +63,4 @@ service mysql stop (stops the databse running, should save a most recent copy of
 
 ![alt text](/code/public/images/Logo.jpg)
 ![Demo](/code/public/images/events_rendering.gif)
+
