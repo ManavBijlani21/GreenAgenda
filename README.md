@@ -1,5 +1,6 @@
 # GreenAgenda
 ![alt text](/code/public/images/Logo.jpg)
+#
 GreenAgenda is a community initiative across Australia that regularly organizes social events for individuals passionate about sustainability, afforestation and environmental conservation. We host activities focused on tree planting, maintaining clean spaces and raising awareness about ecological issues. Our mission is to foster a healthier planet for both present and future generations.
 
 # Table of Contents
@@ -37,4 +38,4 @@ ctrl+c (stop the npm server running, has to be in the terminal the server was st
 service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
 
 ![alt text](/code/public/images/Logo.jpg)
-![Demo](/code/public/images/download.gif)
+![Demo](/code/public/images/events_rendering.gif)
