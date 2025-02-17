@@ -59,8 +59,8 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 ### Community & Feedback page
 <p align="center">
-  <img src="/code/public/images/community-1-readme.jpg" width = "450px" height = "350px">
-  <img src="/code/public/images/community-2-readme.jpg" width = "450px" height = "350px">
+  <img src="/code/public/images/community-1-readme.jpg">
+  <img src="/code/public/images/community-2-readme.jpg">
 </p>
 
 
