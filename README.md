@@ -32,7 +32,10 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
   <img src="/code/public/images/login-readme.jpg" width = "350px" height = "250px">
 </p>
 
-
+### Homepage
+<p align="center">
+  <img src="/code/public/images/homepage-readme.jpg" width = "350px" height = "250px">
+</p>
 
 ## Run Instructions, run in /code directory
 navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
