@@ -102,6 +102,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
     npm start
 
 8. To stop the server and database
+
     • Press Ctrl + C in the terminal to stop the npm server.
 
     • Stop MySQL service
