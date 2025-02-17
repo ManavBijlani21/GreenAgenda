@@ -28,8 +28,8 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 ### Sign Up / Login Page
 <p align="center">
-  <img src="/code/public/images/sign-up-readme.jpg" width = "300px" height = "200px">
-  <img src="/code/public/images/login-readme.jpg" width = "300px" height = "200px">
+  <img src="/code/public/images/sign-up-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/login-readme.jpg" width = "350px" height = "250px">
 </p>
 
 
