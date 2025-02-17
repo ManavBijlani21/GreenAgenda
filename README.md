@@ -6,7 +6,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 ## Table of Contents
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
-- [Screenshots] (#Screenshots)
+- [Screenshots] (#screenshots)
 - [Project Setup](#setup-and-deployment)
 - [Team](#team)
 
@@ -69,31 +69,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 - **Libraries:** Bootstrap
 - **Tools:** Insomnia (API Testing), Git
 
-
 ## Project Setup
-navigate to the /code directory and in there run the following commands
-
-service mysql start
-
-mysql (enter MYSQL CLI)
-
-CREATE database Website_Database (creates a database within mysql)
-
-exit (mysql CLI exit to run CLI commands in terminal)
-
-mysql < database_backup.sql (Command to import the database dump)
-
-mysqldump --databases Website_Database > database_backup.sql (After making the changes to the database, or to save at anypoint)
-
-npm install (install any missing packages)
-
-npm start (not server and DB running, next commands are to stop db and server)
-
-ctrl+c (stop the npm server running, has to be in the terminal the server was started in)
-
-service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
-
-## Project Setup Instructions
 
 1. **Navigate to the `/code` directory**:
    ```bash
