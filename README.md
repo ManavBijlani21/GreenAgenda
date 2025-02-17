@@ -6,7 +6,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 ## Table of Contents
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
-- [Screenshots] (#screenshots)
+- [Screenshots](#screenshots)
 - [Project Setup](#setup-and-deployment)
 - [Team](#team)
 
@@ -103,13 +103,17 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 8. To stop the server and database
     • Press Ctrl + C in the terminal to stop the npm server.
+
     • Stop MySQL service
-        ```bash
-        service mysql stop
+    ```bash
+    service mysql stop
 
 ## Team
 • **Manav Bijlani**
+
 • **Faisal Umar**
+
 • **Jack Rowlands**
+
 • **Sharzil Hasnine**
 
