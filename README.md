@@ -6,9 +6,8 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 ## Table of Contents
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
+- [Screenshots] (#Screenshots)
 - [Project Setup](#setup-and-deployment)
-- [Backend Integration](#backend-integration)
-- [Frontend Deployment](#frontend-deployment)
 - [Team](#team)
 
 ## Key Features
@@ -63,10 +62,16 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
   <img src="/code/public/images/community-2-readme.jpg">
 </p>
 
+## Technologies Used
+- **Frontend:** HTML, CSS, JavaScript, Vue.js
+- **Backend:** Node.js, Express.js
+- **Database:** MySQL
+- **Libraries:** Bootstrap
+- **Tools:** Insomnia (API Testing), Git
 
 
-## Run Instructions, run in /code directory
-navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
+## Project Setup
+navigate to the /code directory and in there run the following commands
 
 service mysql start
 
@@ -82,12 +87,20 @@ mysqldump --databases Website_Database > database_backup.sql (After making the c
 
 npm install (install any missing packages)
 
-npm install nodemailer
-
 npm start (not server and DB running, next commands are to stop db and server)
 
 ctrl+c (stop the npm server running, has to be in the terminal the server was started in)
 
 service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
+
+## Project Setup Instructions
+
+1. **Navigate to the `/code` directory**:
+   ```bash
+   cd /code
+
+2. Start the MySQL service:
+    ```bash
+    service mysql start
 
 
