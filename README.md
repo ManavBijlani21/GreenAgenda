@@ -13,10 +13,15 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 # Key Features
 • **Overview of GreenAgenda** – Provides users with an overview of the mission behind GreenAgenda, featuring an intuitive and visually appealing UI with a green theme.
+
 • **Open Donations** – Informs users about active donation opportunities, allowing them to contribute to the organization.
+
 • **Upcoming Events** – Displays a list of upcoming events across multiple states, including event names, times, and locations for each event.
+
 • **GreenBot** – An AI-powered chatbot integrated to assist users with queries related to events and in general.
+
 • **Community and Feedback** – Users can view feedback from past community members, fetched from the database and displayed with pagination. Registered users can also provide their own feedback.
+
 • **Join the Community** – Enables users to register an account, participate in discussions, and contribute feedback.
 
 
