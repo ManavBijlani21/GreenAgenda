@@ -48,20 +48,19 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 
 ### About page
 <p align="center">
-  <img src="/code/public/images/about-1-readme.jpg" width = "350px" height = "250px">
-  <img src="/code/public/images/about-2-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/about-1-readme.jpg">
 </p>
 
 ### Support page
 <p align="center">
-  <img src="/code/public/images/support-1-readme.jpg" width = "350px" height = "250px">
-  <img src="/code/public/images/support-2-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/support-1-readme.jpg" width = "400px" height = "300px">
+  <img src="/code/public/images/support-2-readme.jpg" width = "400px" height = "300px">
 </p>
 
 ### Community & Feedback page
 <p align="center">
-  <img src="/code/public/images/community-1-readme.jpg" width = "350px" height = "250px">
-  <img src="/code/public/images/community-2-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/community-1-readme.jpg" width = "450px" height = "350px">
+  <img src="/code/public/images/community-2-readme.jpg" width = "450px" height = "350px">
 </p>
 
 
@@ -91,6 +90,4 @@ ctrl+c (stop the npm server running, has to be in the terminal the server was st
 
 service mysql stop (stops the databse running, should save a most recent copy of the DB just before this using the above dump command)
 
-![alt text](/code/public/images/Logo.jpg)
-![Demo](/code/public/images/events_rendering.gif)
 
