@@ -43,6 +43,29 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
   <img src="/code/public/images/chatbot-2-readme.jpg" width = "350px" height = "450px">
 </p>
 
+### Upcoming events
+![Demo](/code/public/images/events_rendering.gif)
+
+### About page
+<p align="center">
+  <img src="/code/public/images/about-1-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/about-2-readme.jpg" width = "350px" height = "250px">
+</p>
+
+### Support page
+<p align="center">
+  <img src="/code/public/images/support-1-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/support-2-readme.jpg" width = "350px" height = "250px">
+</p>
+
+### Community & Feedback page
+<p align="center">
+  <img src="/code/public/images/community-1-readme.jpg" width = "350px" height = "250px">
+  <img src="/code/public/images/community-2-readme.jpg" width = "350px" height = "250px">
+</p>
+
+
+
 ## Run Instructions, run in /code directory
 navigate to the /code directory and in there run the following commands, also the testInfo.txt file contains the login credentials for demo accounts
 
