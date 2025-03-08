@@ -7,7 +7,7 @@ GreenAgenda is a community initiative across Australia that regularly organizes 
 - [Key Features](#key-features)
 - [Technologies Used](#technologies-used)
 - [Screenshots](#screenshots)
-- [Project Setup](#setup-and-deployment)
+- [Project Setup](#project-setup)
 - [Team](#team)
 
 ## Key Features
